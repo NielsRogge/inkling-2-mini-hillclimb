@@ -71,3 +71,6 @@ Next: acceptance gates on the pinned image digest (Job 6b05ba47…): needles at 
 - Concurrent soak: 4 × ~58K tokens at once, **4/4 ok, 3/3 retrieval each**, 19.8 s wall
 - Greedy equivalence (temp 0, 6 prompts, 256 max tokens incl. reasoning): DSpark-7 vs no-spec **6/6 byte-identical**; DSpark repeat also identical. Lossless confirmed.
 - Speed on the pinned image: c1 **189.9 / 190.2** (best runs), c8 682 / 690; base on the same image 157.5 / 640. Matches the hill-climb.
+
+## Deployment
+- 16:39 UTC: created **new** endpoint `huggingface/inkling2mini-tuned-dspark` (aws us-east-2, nvidia-rtx-pro-6000 x1, authenticated, min 0 / max 1, scale-to-zero after 60 min). Pinned image, model rev 7a67ae23, exactly the gated config (`deploy.sh`). URL https://6b05bdde938ee8479c23247f.endpoints.huggingface.cloud. Existing colleague endpoints untouched.
