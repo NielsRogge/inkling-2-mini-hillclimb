@@ -1,6 +1,6 @@
 #!/bin/bash
 # usage: watch.sh JOBID...  — emits new LEDGER/Traceback/RUN-failure lines and terminal states
-export PATH=/root/.local/bin:$PATH; cd /home/user/inkling-hillclimb
+export PATH=/root/.local/bin:$PATH; cd /home/user/inkling-2-mini-hillclimb
 declare -A seen fin
 while true; do
   alive=0
