@@ -39,3 +39,4 @@ Every candidate is run between controls in the same Job (ctl / cand / ctl).
 - vLLM speculative-config levers (from the image's config/speculative.py). **Lossless** ones queued in round 5 (Job …), each between DSpark-7 controls:
   `enable_adaptive_verification` (DSpark-only, per-request confidence-sized verify budget), `rejection_sample_method=block` (block verification, Sun et al.; lossless, accepts ≥ token-wise), `draft_sample_method=greedy` (vs the recipe's probabilistic), `draft_lm_head_quantization=fp8` (the target verifies with its own head, so only acceptance changes).
   Excluded as **lossy**: `rejection_sample_method=fly` and `synthetic`.
+- rtx-vl4-ds7-b (repeat): c1 **190.4**, c8 **724**, prefill 4K/32K 20.7K/20.6K. The vLLM DSpark-7 win reproduces (189.3 / 190.4). Accepted as the current best: vLLM nightly + DSpark-7 probabilistic, 262K context, gpu-mem 0.85.
