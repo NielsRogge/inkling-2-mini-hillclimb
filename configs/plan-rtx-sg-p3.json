@@ -1,0 +1,50 @@
+[
+ {
+  "name": "rtx-sg3-ctl-a",
+  "cmd": "python3 -m sglang.launch_server --model-path thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tp 1 --ep 1 --reasoning-parser inkling --tool-call-parser inkling2 --attention-backend fa4 --max-running-requests 4 --speculative-algorithm DSPARK --speculative-num-draft-tokens 8",
+  "concurrency": 4,
+  "reps": 12
+ },
+ {
+  "name": "rtx-sg3-mega",
+  "cmd": "SGLANG_ENABLE_NV_MEGA_RUNTIME_OPTIMIZATION=1 python3 -m sglang.launch_server --model-path thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tp 1 --ep 1 --reasoning-parser inkling --tool-call-parser inkling2 --attention-backend fa4 --max-running-requests 4 --speculative-algorithm DSPARK --speculative-num-draft-tokens 8",
+  "concurrency": 4,
+  "reps": 12
+ },
+ {
+  "name": "rtx-sg3-ctl-b",
+  "cmd": "python3 -m sglang.launch_server --model-path thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tp 1 --ep 1 --reasoning-parser inkling --tool-call-parser inkling2 --attention-backend fa4 --max-running-requests 4 --speculative-algorithm DSPARK --speculative-num-draft-tokens 8",
+  "concurrency": 4,
+  "reps": 12
+ },
+ {
+  "name": "rtx-sg3-fdraft",
+  "cmd": "SGLANG_OPT_USE_FUSED_DRAFT_SAMPLE=1 python3 -m sglang.launch_server --model-path thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tp 1 --ep 1 --reasoning-parser inkling --tool-call-parser inkling2 --attention-backend fa4 --max-running-requests 4 --speculative-algorithm DSPARK --speculative-num-draft-tokens 8",
+  "concurrency": 4,
+  "reps": 12
+ },
+ {
+  "name": "rtx-sg3-ctl-c",
+  "cmd": "python3 -m sglang.launch_server --model-path thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tp 1 --ep 1 --reasoning-parser inkling --tool-call-parser inkling2 --attention-backend fa4 --max-running-requests 4 --speculative-algorithm DSPARK --speculative-num-draft-tokens 8",
+  "concurrency": 4,
+  "reps": 12
+ },
+ {
+  "name": "rtx-sg3-mqonce",
+  "cmd": "SGLANG_OPT_MOE_QUANT_ONCE=1 python3 -m sglang.launch_server --model-path thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tp 1 --ep 1 --reasoning-parser inkling --tool-call-parser inkling2 --attention-backend fa4 --max-running-requests 4 --speculative-algorithm DSPARK --speculative-num-draft-tokens 8",
+  "concurrency": 4,
+  "reps": 12
+ },
+ {
+  "name": "rtx-sg3-ctl-d",
+  "cmd": "python3 -m sglang.launch_server --model-path thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tp 1 --ep 1 --reasoning-parser inkling --tool-call-parser inkling2 --attention-backend fa4 --max-running-requests 4 --speculative-algorithm DSPARK --speculative-num-draft-tokens 8",
+  "concurrency": 4,
+  "reps": 12
+ },
+ {
+  "name": "rtx-sg3-ctl-e",
+  "cmd": "python3 -m sglang.launch_server --model-path thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tp 1 --ep 1 --reasoning-parser inkling --tool-call-parser inkling2 --attention-backend fa4 --max-running-requests 4 --speculative-algorithm DSPARK --speculative-num-draft-tokens 8",
+  "concurrency": 4,
+  "reps": 12
+ }
+]
