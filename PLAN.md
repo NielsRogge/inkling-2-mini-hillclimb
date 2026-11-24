@@ -17,3 +17,4 @@ Every candidate is run between controls in the same Job (ctl / cand / ctl).
   - Hypothesis for the next round: fewer drafts (3–5) cut verify cost per step at the same ~2-token acceptance. Temperature 1.0 (the model default) caps acceptance; also report a temp-0.6 panel as a secondary metric, labelled.
 - rtx-sg-base-b (control): c1 138.6, c8 598, prefill 19.1K/19.1K. Drift vs base-a: c1 +3.5%, c8 +10% (base-a was the first run in the Job: cold caches). **Verdict: SGLang DSpark-8 accepted over SGLang base on c1** (159.6 beats both controls, 133.9 and 138.6).
 - rtx-sg-ds8-b (repeat): c1 166.6 (a: 159.6), c4 402, TTFT 38 ms. The win reproduces. SGLang DSpark-8 c1 mean of repeats ≈ 163 vs control ≈ 136 (**+20%**).
+- SGLang round 1 Job finished. Round 2 submitted (job 6b05a46d…): DSpark draft-token sweep 3/4/5/6, each between DSpark-8 controls, c4, with the warmup driver.
