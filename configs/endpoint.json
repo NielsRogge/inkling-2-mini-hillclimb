@@ -1,0 +1,2 @@
+{"name": "endpoint-inkling2mini-tuned-dspark", "base_url": "https://6b05bdde938ee8479c23247f.endpoints.huggingface.cloud", "model": "thinkingmachines/Inkling-2-Mini",
+ "concurrency": 8, "prefill_lengths": [4096, 32768], "temperature": 1.0}
