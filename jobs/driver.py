@@ -10,16 +10,40 @@ open(BENCH, "wb").write(base64.b64decode(os.environ["BENCH_B64"]))
 import importlib.util
 _sp = importlib.util.spec_from_file_location("bench", BENCH); bench = importlib.util.module_from_spec(_sp); _sp.loader.exec_module(bench)
 
-open(f"{W}/stop.sh", "w").write("""#!/bin/bash
-# drain first, then stop the server's process group; never pkill -f (could match this shell)
-[ -f /work/srv.pid ] || exit 0
-pid=$(cat /work/srv.pid)
-kill -INT -- -$pid 2>/dev/null
-for i in $(seq 1 90); do kill -0 -- -$pid 2>/dev/null || break; sleep 1; done
-kill -9 -- -$pid 2>/dev/null
-rm -f /work/srv.pid
-for i in $(seq 1 60); do u=$(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits | head -1); [ "$u" -lt 2000 ] && break; sleep 1; done
-""")
+import signal, socket
+SRV = None
+
+def port_free(port=8000):
+    with socket.socket() as so:
+        return so.connect_ex(("127.0.0.1", port)) != 0
+
+def stop_server():
+    """Drain-then-stop: SIGINT the server's process group, wait, then SIGKILL; wait for GPU memory and port to be released."""
+    global SRV
+    if SRV is not None:
+        try:
+            os.killpg(SRV.pid, signal.SIGINT)
+            SRV.wait(timeout=90)
+        except Exception:
+            pass
+        try:
+            os.killpg(SRV.pid, signal.SIGKILL)
+        except Exception:
+            pass
+        try:
+            SRV.wait(timeout=30)
+        except Exception:
+            pass
+        SRV = None
+    for _ in range(120):
+        u = subprocess.run(["bash", "-c", "nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits | head -1"], capture_output=True, text=True).stdout.strip() or "0"
+        if int(u) < 2000 and port_free():
+            break
+        time.sleep(1)
+    else:
+        print("WARNING: GPU memory or port 8000 still held after stop", flush=True)
+        subprocess.run(["bash", "-c", "nvidia-smi; (ss -ltnp || netstat -ltnp) 2>/dev/null | grep 8000; ps -eo pid,pgid,stat,etime,cmd | grep -v ' Z ' | head -40"])
+
 open(f"{W}/mem.sh", "w").write("echo $(( $(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits | head -1) * 1048576 ))\n")
 
 plan = json.loads(base64.b64decode(os.environ["PLAN"]).decode())
@@ -31,16 +55,16 @@ for run in plan:
            "concurrency": 8, "prefill_lengths": [4096, 32768], "temperature": 1.0,
            "memory": {"cap_gib": 1000, "probe": ["bash", f"{W}/mem.sh"], "interval_s": 5}}
     cfg.update(defaults); cfg.update({k: v for k, v in run.items() if k not in ("cmd", "reps", "long")})
-    launch = ["bash", "-c", f"setsid nohup bash -c {json.dumps(run['cmd'])} > {log} 2>&1 < /dev/null & echo $! > {W}/srv.pid"]
     p = f"{W}/configs/{name}.json"; json.dump(cfg, open(p, "w"), indent=1)  # no "launch": bench measures a warmed server
     print(f"=== RUN {name}: {run['cmd']}", flush=True)
     # Launch ourselves so an unmeasured warmup can cover Triton JIT / graph shapes before bench.py measures
     # (first-round vLLM prefill was polluted by "Triton kernel JIT compilation during inference").
-    subprocess.run(["bash", f"{W}/stop.sh"]); t0 = time.monotonic(); subprocess.run(launch, check=True)
+    stop_server(); t0 = time.monotonic()
+    SRV = subprocess.Popen(["bash", "-c", run["cmd"]], stdout=open(log, "w"), stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL, start_new_session=True)
     srv = bench.Server(cfg); healthy = False
     while time.monotonic() - t0 < cfg["health_timeout_s"]:
         if srv.healthy(): healthy = True; break
-        if subprocess.run(["bash", "-c", f"kill -0 -- -$(cat {W}/srv.pid)"], capture_output=True).returncode: break  # server died
+        if SRV.poll() is not None: print(f"server exited with {SRV.returncode}", flush=True); break
         time.sleep(1)
     startup = round(time.monotonic() - t0, 1)
     extra = {"startup_s": startup}
@@ -68,5 +92,5 @@ for run in plan:
         print(subprocess.run(["tail", "-n", "80", log], capture_output=True, text=True).stdout, flush=True)
     else:  # keep startup diagnostics short
         print(subprocess.run(["bash", "-c", f"grep -E -i 'speculat|accept|cuda graph|KV cache|maximum concurrency|attention backend|Loading took|compil' {log} | tail -n 25"], capture_output=True, text=True).stdout, flush=True)
-subprocess.run(["bash", f"{W}/stop.sh"])
+stop_server()
 print("=== LEDGER TABLE"); subprocess.run([sys.executable, BENCH, "show", "ledger.jsonl"])

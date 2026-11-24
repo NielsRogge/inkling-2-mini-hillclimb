@@ -1,2 +1,159 @@
 === RUN rtx-vl-base-a: vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling
 14:39:50 healthy after 348.1 s
+14:40:17 c1 median 156.73 [156.58, 156.74, 156.64, 156.78, 156.71, 156.81]
+14:40:24 c8 aggregate 632.12
+14:40:40 prefill ~4096 201.7 tok/s over 3302 tokens
+14:40:49 prefill ~32768 2837.6 tok/s over 25554 tokens
+{
+ "name": "rtx-vl-base-a",
+ "time": "2026-11-24T14:34:02",
+ "startup_s": 348.1,
+ "ttft_short_ms": 2291.2,
+ "c1_decode": 156.73,
+ "c1_all": [
+  156.58,
+  156.74,
+  156.64,
+  156.78,
+  156.71,
+  156.81
+ ],
+ "c8_aggregate": 632.12,
+ "c8_per_stream": [
+  80.91,
+  80.85,
+  80.85,
+  80.85,
+  80.85,
+  80.84,
+  80.84,
+  80.84
+ ],
+ "prefill_4096": 201.7,
+ "prefill_4096_tokens": 3302,
+ "prefill_32768": 2837.6,
+ "prefill_32768_tokens": 25554,
+ "ok": true,
+ "mem_peak_gib": 91.55,
+ "flags": []
+}
+LEDGER {"name": "rtx-vl-base-a", "time": "2026-11-24T14:34:02", "startup_s": 348.1, "ttft_short_ms": 2291.2, "c1_decode": 156.73, "c1_all": [156.58, 156.74, 156.64, 156.78, 156.71, 156.81], "c8_aggregate": 632.12, "c8_per_stream": [80.91, 80.85, 80.85, 80.85, 80.85, 80.84, 80.84, 80.84], "prefill_4096": 201.7, "prefill_4096_tokens": 3302, "prefill_32768": 2837.6, "prefill_32768_tokens": 25554, "ok": true, "mem_peak_gib": 91.55, "flags": []}
+(EngineCore pid=917) INFO 11-24 14:39:48 [jit_monitor.py:87] Kernel JIT monitor activated; monitored JIT compilations during inference will use mode=warn.
+(EngineCore pid=917) INFO 11-24 14:39:48 [extensible_kv_cache.py:700] Memory after warmup: 70.28 GiB free, 0.02 GiB committed to the KV cache, 3.67 GiB kept for transient activations (3.13 GiB allocated at peak, 3.67 GiB of torch reservation growth); 32904 KV cache blocks (64.27 GiB) fit within the requested 95.03 GiB. Torch may reserve up to 28.88 GiB.
+(EngineCore pid=917) INFO 11-24 14:39:48 [kv_cache_utils.py:1123] GPU KV cache size: 1,443,310 tokens, Maximum concurrency for 1,048,576 tokens per request: 1.38x
+(EngineCore pid=917) INFO 11-24 14:39:48 [extensible_kv_cache.py:536] Extended KV cache to 32904 blocks (64.27 GiB).
+(EngineCore pid=917) INFO 11-24 14:39:48 [core.py:444] init engine (profile, create kv cache, warmup model) took 286.11 s
+(EngineCore pid=917) INFO 11-24 14:39:49 [compilation.py:428] Enabled custom fusions: norm_quant, act_quant
+(EngineCore pid=917) WARNING 11-24 14:39:51 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _rel_attention_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=917) WARNING 11-24 14:39:51 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _rel_decode_combine_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=443) INFO 11-24 14:40:00 [loggers.py:347] Engine 000: Avg prompt throughput: 10.5 tokens/s, Avg generation throughput: 66.8 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 3 reqs, GPU KV cache usage: 0.1%, Prefix cache hit rate: 0.0%
+(EngineCore pid=917) WARNING 11-24 14:40:05 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _seq_metadata_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=443) INFO 11-24 14:40:10 [loggers.py:347] Engine 000: Avg prompt throughput: 8.0 tokens/s, Avg generation throughput: 119.1 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 2 reqs, GPU KV cache usage: 0.1%, Prefix cache hit rate: 0.0%
+(APIServer pid=443) INFO 11-24 14:40:20 [loggers.py:347] Engine 000: Avg prompt throughput: 38.0 tokens/s, Avg generation throughput: 271.7 tokens/s, Running: 8 reqs, Waiting: 0 reqs, Finished: 3 reqs, GPU KV cache usage: 0.8%, Prefix cache hit rate: 0.0%
+(EngineCore pid=917) WARNING 11-24 14:40:25 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _attn_prologue_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=917) WARNING 11-24 14:40:27 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _qr_rel_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=917) WARNING 11-24 14:40:28 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _sconv_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=917) WARNING 11-24 14:40:28 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _k_group_tma_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=917) WARNING 11-24 14:40:29 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _route_tokens_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=917) WARNING 11-24 14:40:29 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _expert_gemm. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=917) WARNING 11-24 14:40:30 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _situ_quantize_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=443) INFO 11-24 14:40:30 [loggers.py:347] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 255.9 tokens/s, Running: 0 reqs, Waiting: 0 reqs, Finished: 8 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(EngineCore pid=917) WARNING 11-24 14:40:30 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _combine_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=917) WARNING 11-24 14:40:31 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _attn_res_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=917) WARNING 11-24 14:40:39 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _mxfp8_gemm. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=443) INFO 11-24 14:40:40 [loggers.py:347] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, Finished: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(EngineCore pid=917) WARNING 11-24 14:40:44 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _k_group_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+
+=== RUN rtx-vl-ds7-a: vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --speculative-config '{"method": "dspark", "num_speculative_tokens": 7, "draft_sample_method": "probabilistic"}'
+{
+ "name": "rtx-vl-ds7-a",
+ "time": "2026-11-24T14:40:49",
+ "ok": false,
+ "error": "server did not become healthy",
+ "mem_peak_gib": 93.7,
+ "flags": []
+}
+LEDGER {"name": "rtx-vl-ds7-a", "time": "2026-11-24T14:40:49", "ok": false, "error": "server did not become healthy", "mem_peak_gib": 93.7, "flags": []}
+--- tail of /work/logs/rtx-vl-ds7-a.log
+  File "/usr/local/lib/python3.14/dist-packages/vllm/entrypoints/launchers/api_server/entry.py", line 60, in build_async_engine_client
+    async with build_async_engine_client_from_engine_args(
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        engine_args,
+        ^^^^^^^^^^^^
+        usage_context=usage_context,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        client_config=client_config,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as engine:
+    ^
+  File "/usr/lib/python3.14/contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.14/dist-packages/vllm/entrypoints/launchers/api_server/entry.py", line 94, in build_async_engine_client_from_engine_args
+    async_llm = AsyncLLM.from_vllm_config(
+        vllm_config=vllm_config,
+    ...<6 lines>...
+        client_index=client_index,
+    )
+  File "/usr/local/lib/python3.14/dist-packages/vllm/v1/engine/async_llm.py", line 267, in from_vllm_config
+    return cls(
+        vllm_config=vllm_config,
+    ...<9 lines>...
+        client_index=client_index,
+    )
+  File "/usr/local/lib/python3.14/dist-packages/vllm/v1/engine/async_llm.py", line 196, in __init__
+    self.engine_core = EngineCoreClient.make_async_mp_client(
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        vllm_config=vllm_config,
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        renderer=renderer,
+        ^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.14/dist-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.14/dist-packages/vllm/v1/engine/core_client.py", line 183, in make_async_mp_client
+    return AsyncMPClient(
+        *client_args,
+        renderer=renderer,
+    )
+  File "/usr/local/lib/python3.14/dist-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.14/dist-packages/vllm/v1/engine/core_client.py", line 1198, in __init__
+    super().__init__(
+    ~~~~~~~~~~~~~~~~^
+        asyncio_mode=True,
+        ^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        renderer=renderer,
+        ^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.14/dist-packages/vllm/v1/engine/core_client.py", line 731, in __init__
+    with launch_core_engines(
+         ~~~~~~~~~~~~~~~~~~~^
+        vllm_config, executor_class, collect_stats, addresses
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as engine_launch:
+    ^
+  File "/usr/lib/python3.14/contextlib.py", line 148, in __exit__
+    next(self.gen)
+    ~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.14/dist-packages/vllm/v1/engine/utils.py", line 1410, in launch_core_engines
+    wait_for_engine_startup(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        handshake_socket,
+        ^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        launch,
+        ^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.14/dist-packages/vllm/v1/engine/utils.py", line 1494, in wait_for_engine_startup
+    raise RuntimeError(
+    ...<8 lines>...
+    )
+RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
+
+=== RUN rtx-vl-base-b: vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling

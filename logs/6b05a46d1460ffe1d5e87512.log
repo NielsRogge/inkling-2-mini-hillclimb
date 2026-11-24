@@ -1,0 +1,61 @@
+=== RUN rtx-sg2-ctl8-a: python3 -m sglang.launch_server --model-path thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tp 1 --ep 1 --reasoning-parser inkling --tool-call-parser inkling2 --attention-backend fa4 --max-running-requests 4 --speculative-algorithm DSPARK --speculative-num-draft-tokens 8
+14:57:19 c1 median 160.79 [206.23, 152.54, 157.47, 170.65, 164.11, 142.1]
+14:57:25 c4 aggregate 382.1
+14:57:25 prefill ~4096 17951.2 tok/s over 3302 tokens
+14:57:26 prefill ~32768 18863.8 tok/s over 25554 tokens
+{
+ "name": "rtx-sg2-ctl8-a",
+ "time": "2026-11-24T14:57:00",
+ "ttft_short_ms": 39.8,
+ "c1_decode": 160.79,
+ "c1_all": [
+  206.23,
+  152.54,
+  157.47,
+  170.65,
+  164.11,
+  142.1
+ ],
+ "c4_aggregate": 382.1,
+ "c4_per_stream": [
+  144.23,
+  104.65,
+  99.4,
+  106.29
+ ],
+ "prefill_4096": 17951.2,
+ "prefill_4096_tokens": 3302,
+ "prefill_32768": 18863.8,
+ "prefill_32768_tokens": 25554,
+ "ok": true,
+ "mem_peak_gib": 82.57,
+ "flags": []
+}
+LEDGER {"name": "rtx-sg2-ctl8-a", "time": "2026-11-24T14:57:00", "ttft_short_ms": 39.8, "c1_decode": 160.79, "c1_all": [206.23, 152.54, 157.47, 170.65, 164.11, 142.1], "c4_aggregate": 382.1, "c4_per_stream": [144.23, 104.65, 99.4, 106.29], "prefill_4096": 17951.2, "prefill_4096_tokens": 3302, "prefill_32768": 18863.8, "prefill_32768_tokens": 25554, "ok": true, "mem_peak_gib": 82.57, "flags": [], "startup_s": 321.0, "warmup_s": 9.4}
+[2026-11-24 14:57:13 PID617] Decode batch, #running-req: 1, #full token: 384, full token usage: 0.00, #window_1024 token: 384, window_1024 token usage: 0.00, mamba num: 3, mamba usage: 0.00, accept len: 2.15, accept rate: 0.16, cuda graph: True, gen throughput (token/s): 151.25, #queue-req: 0
+[2026-11-24 14:57:14 PID617] Decode batch, #running-req: 1, #full token: 384, full token usage: 0.00, #window_1024 token: 384, window_1024 token usage: 0.00, mamba num: 3, mamba usage: 0.00, accept len: 2.08, accept rate: 0.15, cuda graph: True, gen throughput (token/s): 145.12, #queue-req: 0
+[2026-11-24 14:57:14 PID617] Decode batch, #running-req: 1, #full token: 384, full token usage: 0.00, #window_1024 token: 384, window_1024 token usage: 0.00, mamba num: 3, mamba usage: 0.00, accept len: 2.52, accept rate: 0.22, cuda graph: True, gen throughput (token/s): 175.81, #queue-req: 0
+[2026-11-24 14:57:15 PID617] Decode batch, #running-req: 1, #full token: 768, full token usage: 0.00, #window_1024 token: 768, window_1024 token usage: 0.01, mamba num: 3, mamba usage: 0.00, accept len: 2.50, accept rate: 0.21, cuda graph: True, gen throughput (token/s): 176.18, #queue-req: 0
+[2026-11-24 14:57:15 PID617] Decode batch, #running-req: 1, #full token: 768, full token usage: 0.00, #window_1024 token: 768, window_1024 token usage: 0.01, mamba num: 3, mamba usage: 0.00, accept len: 2.17, accept rate: 0.17, cuda graph: True, gen throughput (token/s): 152.91, #queue-req: 0
+[2026-11-24 14:57:16 PID617] Prefill batch, #new-seq: 1, #new-token: 34, #cached-token: 0, full token usage: 0.00, window_1024 token usage: 0.00, mamba usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: True, input throughput (token/s): 10.73
+[2026-11-24 14:57:16 PID617] Decode batch, #running-req: 1, #full token: 384, full token usage: 0.00, #window_1024 token: 384, window_1024 token usage: 0.00, mamba num: 3, mamba usage: 0.00, accept len: 2.30, accept rate: 0.19, cuda graph: True, gen throughput (token/s): 152.80, #queue-req: 0
+[2026-11-24 14:57:17 PID617] Decode batch, #running-req: 1, #full token: 384, full token usage: 0.00, #window_1024 token: 384, window_1024 token usage: 0.00, mamba num: 3, mamba usage: 0.00, accept len: 1.65, accept rate: 0.09, cuda graph: True, gen throughput (token/s): 116.46, #queue-req: 0
+[2026-11-24 14:57:17 PID617] Decode batch, #running-req: 1, #full token: 384, full token usage: 0.00, #window_1024 token: 384, window_1024 token usage: 0.00, mamba num: 3, mamba usage: 0.00, accept len: 1.68, accept rate: 0.10, cuda graph: True, gen throughput (token/s): 119.25, #queue-req: 0
+[2026-11-24 14:57:18 PID617] Decode batch, #running-req: 1, #full token: 384, full token usage: 0.00, #window_1024 token: 384, window_1024 token usage: 0.00, mamba num: 3, mamba usage: 0.00, accept len: 2.33, accept rate: 0.19, cuda graph: True, gen throughput (token/s): 161.39, #queue-req: 0
+[2026-11-24 14:57:18 PID617] Decode batch, #running-req: 1, #full token: 768, full token usage: 0.00, #window_1024 token: 768, window_1024 token usage: 0.01, mamba num: 3, mamba usage: 0.00, accept len: 2.45, accept rate: 0.21, cuda graph: True, gen throughput (token/s): 168.88, #queue-req: 0
+[2026-11-24 14:57:19 PID617] Decode batch, #running-req: 1, #full token: 768, full token usage: 0.00, #window_1024 token: 768, window_1024 token usage: 0.01, mamba num: 3, mamba usage: 0.00, accept len: 1.60, accept rate: 0.09, cuda graph: True, gen throughput (token/s): 112.13, #queue-req: 0
+[2026-11-24 14:57:19 PID617] Prefill batch, #new-seq: 2, #new-token: 74, #cached-token: 0, full token usage: 0.00, window_1024 token usage: 0.00, mamba usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: True, input throughput (token/s): 19.53
+[2026-11-24 14:57:20 PID617] Prefill batch, #new-seq: 2, #new-token: 80, #cached-token: 0, full token usage: 0.00, window_1024 token usage: 0.01, mamba usage: 0.01, #running-req: 2, #queue-req: 0, #pending-token: 0, cuda graph: True, input throughput (token/s): 3708.90
+[2026-11-24 14:57:20 PID617] Decode batch, #running-req: 4, #full token: 1536, full token usage: 0.00, #window_1024 token: 1536, window_1024 token usage: 0.01, mamba num: 12, mamba usage: 0.01, accept len: 2.90, accept rate: 0.27, cuda graph: True, gen throughput (token/s): 269.69, #queue-req: 0
+[2026-11-24 14:57:21 PID617] Decode batch, #running-req: 4, #full token: 1536, full token usage: 0.00, #window_1024 token: 1536, window_1024 token usage: 0.01, mamba num: 12, mamba usage: 0.01, accept len: 2.23, accept rate: 0.17, cuda graph: True, gen throughput (token/s): 412.02, #queue-req: 0
+[2026-11-24 14:57:22 PID617] Decode batch, #running-req: 4, #full token: 1536, full token usage: 0.00, #window_1024 token: 1536, window_1024 token usage: 0.01, mamba num: 12, mamba usage: 0.01, accept len: 2.26, accept rate: 0.18, cuda graph: True, gen throughput (token/s): 415.42, #queue-req: 0
+[2026-11-24 14:57:22 PID617] Decode batch, #running-req: 4, #full token: 2688, full token usage: 0.00, #window_1024 token: 2688, window_1024 token usage: 0.03, mamba num: 12, mamba usage: 0.01, accept len: 2.35, accept rate: 0.19, cuda graph: True, gen throughput (token/s): 422.27, #queue-req: 0
+[2026-11-24 14:57:23 PID617] Decode batch, #running-req: 3, #full token: 1920, full token usage: 0.00, #window_1024 token: 1920, window_1024 token usage: 0.02, mamba num: 9, mamba usage: 0.01, accept len: 2.73, accept rate: 0.25, cuda graph: True, gen throughput (token/s): 456.73, #queue-req: 0
+[2026-11-24 14:57:24 PID617] Decode batch, #running-req: 3, #full token: 1920, full token usage: 0.00, #window_1024 token: 1920, window_1024 token usage: 0.02, mamba num: 9, mamba usage: 0.01, accept len: 2.11, accept rate: 0.16, cuda graph: True, gen throughput (token/s): 305.55, #queue-req: 0
+[2026-11-24 14:57:25 PID617] Prefill batch, #new-seq: 1, #new-token: 3302, #cached-token: 0, full token usage: 0.00, window_1024 token usage: 0.00, mamba usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: True, input throughput (token/s): 617.82
+[2026-11-24 14:57:25 PID617] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, window_1024 token usage: 0.09, mamba usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 17362, cuda graph: True, input throughput (token/s): 20109.01
+[2026-11-24 14:57:26 PID617] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, window_1024 token usage: 0.09, mamba usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 9170, cuda graph: True, input throughput (token/s): 19537.12
+[2026-11-24 14:57:26 PID617] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, window_1024 token usage: 0.02, mamba usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 978, cuda graph: True, input throughput (token/s): 17373.89
+[2026-11-24 14:57:26 PID617] Prefill batch, #new-seq: 1, #new-token: 978, #cached-token: 0, full token usage: 0.00, window_1024 token usage: 0.00, mamba usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: True, input throughput (token/s): 16050.50
+
+=== RUN rtx-sg2-d4-a: python3 -m sglang.launch_server --model-path thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tp 1 --ep 1 --reasoning-parser inkling --tool-call-parser inkling2 --attention-backend fa4 --max-running-requests 4 --speculative-algorithm DSPARK --speculative-num-draft-tokens 4
