@@ -1,0 +1,55 @@
+=== RUN rtx-vl-dbg-ds7: vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --speculative-config '{"method": "dspark", "num_speculative_tokens": 7, "draft_sample_method": "probabilistic"}'
+server exited with 1
+LEDGER {"name": "rtx-vl-dbg-ds7", "ok": false, "error": "server did not become healthy", "startup_s": 419.1}
+--- tail of /work/logs/rtx-vl-dbg-ds7.log
+        *client_args,
+        renderer=renderer,
+    )
+  File "/usr/local/lib/python3.14/dist-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.14/dist-packages/vllm/v1/engine/core_client.py", line 1198, in __init__
+    super().__init__(
+    ~~~~~~~~~~~~~~~~^
+        asyncio_mode=True,
+        ^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        renderer=renderer,
+        ^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.14/dist-packages/vllm/v1/engine/core_client.py", line 731, in __init__
+    with launch_core_engines(
+         ~~~~~~~~~~~~~~~~~~~^
+        vllm_config, executor_class, collect_stats, addresses
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as engine_launch:
+    ^
+  File "/usr/lib/python3.14/contextlib.py", line 148, in __exit__
+    next(self.gen)
+    ~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.14/dist-packages/vllm/v1/engine/utils.py", line 1410, in launch_core_engines
+    wait_for_engine_startup(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        handshake_socket,
+        ^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        launch,
+        ^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.14/dist-packages/vllm/v1/engine/utils.py", line 1494, in wait_for_engine_startup
+    raise RuntimeError(
+    ...<8 lines>...
+    )
+RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
+
+--- error lines in /work/logs/rtx-vl-dbg-ds7.log
+69:(EngineCore pid=1099) WARNING 11-24 15:34:51 [speculator.py:325] Draft model Inkling2DSparkModel does not support external multimodal embeddings. Embeddings from the target model will not be passed to the drafter; using text-only draft inputs instead.
+212:(EngineCore pid=1099) ERROR 11-24 15:40:36 [core.py:1764]     raise ValueError(
+215:(EngineCore pid=1099) ERROR 11-24 15:40:36 [core.py:1764] ValueError: To serve at least one request with the model's max seq len (1048576), (52.64 GiB KV cache is needed, which is larger than the available KV cache memory (48.07 GiB). Based on the available memory, the estimated maximum model length is 915456. The extensible KV cache already takes all device memory left after the model, its activations, CUDA graphs and warmup; decrease `max_model_len` or `max_num_seqs`, or the model needs a device with more memory. CUDA graphs take less with fewer or smaller capture sizes in the compilation config. Decreasing `max_model_len` also reduces what is needed. See https://docs.vllm.ai/en/latest/configuration/conserving_memory/ for more details.
+268:    raise ValueError(
+271:ValueError: To serve at least one request with the model's max seq len (1048576), (52.64 GiB KV cache is needed, which is larger than the available KV cache memory (48.07 GiB). Based on the available memory, the estimated maximum model length is 915456. The extensible KV cache already takes all device memory left after the model, its activations, CUDA graphs and warmup; decrease `max_model_len` or `max_num_seqs`, or the model needs a device with more memory. CUDA graphs take less with fewer or smaller capture sizes in the compilation config. Decreasing `max_model_len` also reduces what is needed. See https://docs.vllm.ai/en/latest/configuration/conserving_memory/ for more details.
+393:    raise RuntimeError(
+396:RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
+
+=== RUN rtx-vl-dbg-ds7-eager: vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --speculative-config '{"method": "dspark", "num_speculative_tokens": 7, "draft_sample_method": "probabilistic"}' --enforce-eager
