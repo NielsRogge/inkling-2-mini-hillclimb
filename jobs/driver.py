@@ -1,7 +1,7 @@
 # Hill-climb driver that runs inside one HF Job (one GPU, one server at a time).
 # PLAN (env, JSON list) = runs in order; each run: {"name", "cmd" (server shell command), optional bench overrides}.
 # Uses the inference-optimisation skill's bench.py unchanged; prints each ledger line with a LEDGER marker.
-import json, os, subprocess, sys, time, base64
+import json, os, subprocess, sys, time, base64, urllib.request
 
 W = "/work"; os.makedirs(f"{W}/logs", exist_ok=True); os.makedirs(f"{W}/configs", exist_ok=True)
 os.chdir(W)
@@ -83,6 +83,39 @@ for run in plan:
         args = [sys.executable, BENCH, "run", p, "--reps", str(run.get("reps", defaults.get("reps", 6)))]
         if run.get("long"): args += ["--long", str(run["long"])]
         subprocess.run(args)
+        # optional acceptance gates (skill: needle at ~50% / ~100% ctx, concurrent soak, greedy equivalence)
+        for L in run.get("needles", []):
+            try:
+                prompt, codes = bench.document(L, seed=L + 7)
+                r = srv.chat(prompt, 256, temperature=0.0)
+                extra.setdefault("needle", []).append({"target": L, "prompt_tokens": r["prompt_tokens"], "ttft_s": round(r["ttft"], 1),
+                    "prefill": round(r["prompt_tokens"] / r["ttft"], 1) if r["prompt_tokens"] else None,
+                    "retrieval": f"{sum(c in r['text'] for c in codes)}/{len(codes)}"})
+            except Exception as e:
+                extra.setdefault("needle", []).append({"target": L, "error": repr(e)[:300]})
+            print("NEEDLE", json.dumps(extra["needle"][-1]), flush=True)
+        if run.get("soak"):
+            n, L = run["soak"]
+            from concurrent.futures import ThreadPoolExecutor
+            def one(i):
+                prompt, codes = bench.document(L, seed=1000 + i)
+                try:
+                    r = srv.chat(prompt, 128, temperature=0.0); return {"ok": True, "prompt_tokens": r["prompt_tokens"], "retrieval": f"{sum(c in r['text'] for c in codes)}/{len(codes)}"}
+                except Exception as e:
+                    return {"ok": False, "error": repr(e)[:200]}
+            ts = time.monotonic()
+            with ThreadPoolExecutor(n) as ex: res = list(ex.map(one, range(n)))
+            extra["soak"] = {"n": n, "target": L, "wall_s": round(time.monotonic() - ts, 1), "results": res}
+            print("SOAK", json.dumps(extra["soak"]), flush=True)
+        if run.get("greedy_dump"):
+            outs = []
+            for q in bench.PROMPTS:
+                body = {"model": cfg["model"], "messages": [{"role": "user", "content": q}], "max_tokens": 256, "temperature": 0.0}
+                req = urllib.request.Request(cfg["base_url"] + "/v1/chat/completions", data=json.dumps(body).encode(), headers={"Content-Type": "application/json"})
+                m = json.loads(urllib.request.urlopen(req, timeout=600).read())["choices"][0]["message"]
+                outs.append((m.get("reasoning_content") or m.get("reasoning") or "") + "\n<<>>\n" + (m.get("content") or ""))
+            extra["greedy_outputs"] = outs
+            print("GREEDY", json.dumps({"name": name, "outputs": outs}), flush=True)
         lines = open("ledger.jsonl").read().strip().splitlines(); d = json.loads(lines[-1]); d.update(extra)
         lines[-1] = json.dumps(d); open("ledger.jsonl", "w").write("\n".join(lines) + "\n")
     last = open("ledger.jsonl").read().strip().splitlines()[-1]
@@ -95,4 +128,5 @@ for run in plan:
     else:  # keep startup diagnostics short
         print(subprocess.run(["bash", "-c", f"grep -E -i 'speculat|accept|cuda graph|KV cache|maximum concurrency|attention backend|Loading took|compil' {log} | tail -n 25"], capture_output=True, text=True).stdout, flush=True)
 stop_server()
+subprocess.run(["bash", "-c", "python3 -c \"import vllm; print('VERSION vllm', vllm.__version__)\" 2>/dev/null; python3 -c \"import sglang; print('VERSION sglang', sglang.__version__)\" 2>/dev/null"])
 print("=== LEDGER TABLE"); subprocess.run([sys.executable, BENCH, "show", "ledger.jsonl"])

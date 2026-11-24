@@ -45,3 +45,21 @@ Every candidate is run between controls in the same Job (ctl / cand / ctl).
 - vLLM `enable_adaptive_verification`: not supported for Inkling2 DSpark (`assert self._draft_topk is None and not self.enable_adaptive_verification` at engine init). Lever closed. rtx-vl5-ctl-a: c1 190.3 / c8 722 (matches round 4; 32K prefill 4.7K is again the first-run-in-Job JIT artifact).
 - vLLM block verification: c1 190.1 / c8 714 vs ctls 190.5 / 727 and 190.3 / 719. **Reject (no effect).**
 - SGLang greedy draft (on MEGA): c1 156.8 / c4 369, clearly worse. **Reject.** SGLang mega-c: 174.4 / 419, within the control range.
+- vLLM greedy draft: c1 168.6 / c8 606 vs ctls ~190.4 / ~720. **Reject (−11%).** Probabilistic drafting matters at temperature 1.0.
+- vLLM `draft_lm_head_quantization=fp8`: `ValidationError: only supported by the DeepSeek-V4/V4.1 DSpark drafters`. Lever closed. ctl-d: 191.3 / 719.
+- SGLang mrr8 (MEGA, c8): c8 660 agg, c1 179. Below vLLM DSpark c8 (~720).
+
+## STATUS: plateau (2026-11-24 16:25 UTC)
+Four consecutive levers on the best config were null, worse or unsupported (adaptive verification, block verification, greedy draft, fp8 draft head). SGLang levers (MEGA, fused draft sample, MoE quant once, greedy draft) were also null.
+
+| Metric (RTX PRO 6000, temp 1.0, thinking on) | Baseline (SGLang fa4, no spec = colleagues' endpoint config) | Best: vLLM nightly + DSpark-7 | Ceiling (THEORY.md) |
+|---|---:|---:|---:|
+| c1 decode (median of 12, 6-prompt panel) | 133.9–138.6 | **190.6** (4 runs, sd 0.4%) | ~256 bandwidth-only (no spec) / ~345 at accept 4; practical c1 is launch/latency-bound |
+| c8 aggregate decode | 543–598 | **716** (median of 8 runs) | 5,418+ (bandwidth); far from binding |
+| Prefill 4K / 32K (warm) | 18.7K / 16.9K–19.1K | 20.7K / 20.6K | ≥17.3K / 15.5K (BF16-based; NVFP4 exceeds it) |
+| TTFT short | 38–114 ms | 40 ms | |
+| Startup (cached weights) | 90–297 s | ~95 s (Job), first ~350 s with download | |
+
+What got the gains: (1) engine choice: vLLM nightly beats SGLang by +17% c1 without spec; (2) DSpark-7 probabilistic: +21% c1 / +12% c8 on vLLM; (3) making DSpark start on 96 GB: `--max-model-len 262144` + `--gpu-memory-utilization 0.85`.
+What limits further gains: DSpark acceptance ≈ 2.3–2.4 tokens/step at temperature 1.0 (per-position 0.6 / 0.33 / 0.19 …). Draft length is fixed at 7 by the checkpoint in both engines, and the c1 step is latency-bound (48 layer visits). The next levers need kernel work, or a lower serving temperature (a product decision, not a lossless config change).
+Next: acceptance gates on the pinned image digest (Job 6b05ba47…): needles at ~131K and ~258K, a 4 × 60K concurrent soak, a greedy equivalence check vs no-spec, and a repeat of the speed numbers.
