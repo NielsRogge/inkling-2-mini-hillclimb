@@ -74,3 +74,4 @@ Next: acceptance gates on the pinned image digest (Job 6b05ba47…): needles at 
 
 ## Deployment
 - 16:39 UTC: created **new** endpoint `huggingface/inkling2mini-tuned-dspark` (aws us-east-2, nvidia-rtx-pro-6000 x1, authenticated, min 0 / max 1, scale-to-zero after 60 min). Pinned image, model rev 7a67ae23, exactly the gated config (`deploy.sh`). URL https://6b05bdde938ee8479c23247f.endpoints.huggingface.cloud. Existing colleague endpoints untouched.
+- 16:46 UTC: endpoint **running**. Smoke test: correct answer, reasoning parsed into `reasoning`. End-to-end bench from outside the cluster (jobs/bench_remote.py, the same bench.py; numbers include the network): c1 **194.9** (median of 12), c8 **673**, prefill 4K 11.7K / 32K 19.2K tok/s, TTFT short 198 ms. These match the Jobs measurements once network RTT is accounted for: TTFT and 4K prefill absorb ~160 ms RTT, and c8 wall clock includes it.
