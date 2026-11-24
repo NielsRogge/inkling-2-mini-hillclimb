@@ -1,0 +1,614 @@
+=== RUN rtx-vl5-ctl-a: vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{"method": "dspark", "num_speculative_tokens": 7, "draft_sample_method": "probabilistic"}'
+16:13:05 c1 median 190.25 [306.55, 195.92, 173.6, 202.48, 208.36, 163.98, 262.11, 184.57, 178.38, 177.54, 239.34, 165.33]
+16:13:10 c8 aggregate 721.71
+16:13:11 prefill ~4096 20614.5 tok/s over 3302 tokens
+16:13:16 prefill ~32768 4730.6 tok/s over 25554 tokens
+{
+ "name": "rtx-vl5-ctl-a",
+ "time": "2026-11-24T16:12:31",
+ "ttft_short_ms": 40.5,
+ "c1_decode": 190.25,
+ "c1_all": [
+  306.55,
+  195.92,
+  173.6,
+  202.48,
+  208.36,
+  163.98,
+  262.11,
+  184.57,
+  178.38,
+  177.54,
+  239.34,
+  165.33
+ ],
+ "c8_aggregate": 721.71,
+ "c8_per_stream": [
+  113.01,
+  101.22,
+  91.17,
+  97.63,
+  97.23,
+  93.51,
+  133.5,
+  97.23
+ ],
+ "prefill_4096": 20614.5,
+ "prefill_4096_tokens": 3302,
+ "prefill_32768": 4730.6,
+ "prefill_32768_tokens": 25554,
+ "ok": true,
+ "mem_peak_gib": 73.94,
+ "flags": []
+}
+LEDGER {"name": "rtx-vl5-ctl-a", "time": "2026-11-24T16:12:31", "ttft_short_ms": 40.5, "c1_decode": 190.25, "c1_all": [306.55, 195.92, 173.6, 202.48, 208.36, 163.98, 262.11, 184.57, 178.38, 177.54, 239.34, 165.33], "c8_aggregate": 721.71, "c8_per_stream": [113.01, 101.22, 91.17, 97.63, 97.23, 93.51, 133.5, 97.23], "prefill_4096": 20614.5, "prefill_4096_tokens": 3302, "prefill_32768": 4730.6, "prefill_32768_tokens": 25554, "ok": true, "mem_peak_gib": 73.94, "flags": [], "startup_s": 414.2, "warmup_s": 27.3}
+(EngineCore pid=1098) INFO 11-24 16:12:01 [extensible_kv_cache.py:536] Extended KV cache to 20680 blocks (45.44 GiB).
+(EngineCore pid=1098) INFO 11-24 16:12:01 [core.py:444] init engine (profile, create kv cache, warmup model) took 344.09 s
+(EngineCore pid=1098) WARNING 11-24 16:12:05 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _rel_attention_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=1098) WARNING 11-24 16:12:08 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _route_tokens_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=1098) WARNING 11-24 16:12:09 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _scatter_nvfp4_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=1098) WARNING 11-24 16:12:09 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _expert_gemm. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=1098) WARNING 11-24 16:12:10 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _situ_quantize_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=444) INFO 11-24 16:12:12 [loggers.py:347] Engine 000: Avg prompt throughput: 1.7 tokens/s, Avg generation throughput: 6.1 tokens/s, Running: 0 reqs, Waiting: 0 reqs, Finished: 1 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=444) INFO 11-24 16:12:12 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.71, Accepted throughput: 3.90 tokens/s, Drafted throughput: 15.97 tokens/s, Accepted: 41 tokens, Drafted: 168 tokens, Verified: 168 tokens, Per-position acceptance rate: 0.625, 0.458, 0.292, 0.250, 0.083, 0.000, 0.000, Avg Draft acceptance rate: 24.4%
+(EngineCore pid=1098) WARNING 11-24 16:12:13 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _mxfp8_gemm. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=1098) WARNING 11-24 16:12:14 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _seq_metadata_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=1098) WARNING 11-24 16:12:18 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _k_group_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=444) INFO 11-24 16:12:22 [loggers.py:347] Engine 000: Avg prompt throughput: 330.4 tokens/s, Avg generation throughput: 1.6 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 1 reqs, GPU KV cache usage: 38.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=444) INFO 11-24 16:12:22 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 5.00, Accepted throughput: 1.20 tokens/s, Drafted throughput: 2.10 tokens/s, Accepted: 12 tokens, Drafted: 21 tokens, Verified: 21 tokens, Per-position acceptance rate: 1.000, 0.667, 0.667, 0.667, 0.333, 0.333, 0.333, Avg Draft acceptance rate: 57.1%
+(EngineCore pid=1098) WARNING 11-24 16:12:25 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _ll_gemm_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=444) INFO 11-24 16:12:32 [loggers.py:347] Engine 000: Avg prompt throughput: 5537.2 tokens/s, Avg generation throughput: 266.9 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 22 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=444) INFO 11-24 16:12:32 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.71, Accepted throughput: 168.51 tokens/s, Drafted throughput: 690.93 tokens/s, Accepted: 1685 tokens, Drafted: 6909 tokens, Verified: 6909 tokens, Per-position acceptance rate: 0.619, 0.399, 0.260, 0.168, 0.120, 0.085, 0.056, Avg Draft acceptance rate: 24.4%
+(APIServer pid=444) INFO 11-24 16:12:42 [loggers.py:347] Engine 000: Avg prompt throughput: 11.5 tokens/s, Avg generation throughput: 141.4 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 3 reqs, GPU KV cache usage: 0.3%, Prefix cache hit rate: 0.0%
+(APIServer pid=444) INFO 11-24 16:12:42 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.25, Accepted throughput: 78.40 tokens/s, Drafted throughput: 440.30 tokens/s, Accepted: 784 tokens, Drafted: 4403 tokens, Verified: 4403 tokens, Per-position acceptance rate: 0.599, 0.310, 0.159, 0.078, 0.052, 0.030, 0.017, Avg Draft acceptance rate: 17.8%
+(APIServer pid=444) INFO 11-24 16:12:52 [loggers.py:347] Engine 000: Avg prompt throughput: 15.0 tokens/s, Avg generation throughput: 196.2 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 4 reqs, GPU KV cache usage: 0.3%, Prefix cache hit rate: 0.0%
+(APIServer pid=444) INFO 11-24 16:12:52 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.38, Accepted throughput: 113.90 tokens/s, Drafted throughput: 578.19 tokens/s, Accepted: 1139 tokens, Drafted: 5782 tokens, Verified: 5782 tokens, Per-position acceptance rate: 0.607, 0.314, 0.191, 0.127, 0.073, 0.042, 0.025, Avg Draft acceptance rate: 19.7%
+(APIServer pid=444) INFO 11-24 16:13:02 [loggers.py:347] Engine 000: Avg prompt throughput: 15.6 tokens/s, Avg generation throughput: 191.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 4 reqs, GPU KV cache usage: 0.2%, Prefix cache hit rate: 0.0%
+(APIServer pid=444) INFO 11-24 16:13:02 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.30, Accepted throughput: 108.19 tokens/s, Drafted throughput: 583.05 tokens/s, Accepted: 1082 tokens, Drafted: 5831 tokens, Verified: 5831 tokens, Per-position acceptance rate: 0.581, 0.325, 0.186, 0.097, 0.055, 0.030, 0.024, Avg Draft acceptance rate: 18.6%
+(APIServer pid=444) INFO 11-24 16:13:12 [loggers.py:347] Engine 000: Avg prompt throughput: 360.6 tokens/s, Avg generation throughput: 446.7 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 10 reqs, GPU KV cache usage: 38.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=444) INFO 11-24 16:13:12 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.37, Accepted throughput: 258.01 tokens/s, Drafted throughput: 1320.24 tokens/s, Accepted: 2580 tokens, Drafted: 13202 tokens, Verified: 13202 tokens, Per-position acceptance rate: 0.599, 0.353, 0.195, 0.108, 0.059, 0.035, 0.019, Avg Draft acceptance rate: 19.5%
+
+=== RUN rtx-vl5-adaptive: vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{"method": "dspark", "num_speculative_tokens": 7, "draft_sample_method": "probabilistic", "enable_adaptive_verification": true}'
+server exited with 1
+LEDGER {"name": "rtx-vl5-adaptive", "ok": false, "error": "server did not become healthy", "startup_s": 23.0}
+--- tail of /work/logs/rtx-vl5-adaptive.log
+        *client_args,
+        renderer=renderer,
+    )
+  File "/usr/local/lib/python3.14/dist-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.14/dist-packages/vllm/v1/engine/core_client.py", line 1198, in __init__
+    super().__init__(
+    ~~~~~~~~~~~~~~~~^
+        asyncio_mode=True,
+        ^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        renderer=renderer,
+        ^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.14/dist-packages/vllm/v1/engine/core_client.py", line 731, in __init__
+    with launch_core_engines(
+         ~~~~~~~~~~~~~~~~~~~^
+        vllm_config, executor_class, collect_stats, addresses
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as engine_launch:
+    ^
+  File "/usr/lib/python3.14/contextlib.py", line 148, in __exit__
+    next(self.gen)
+    ~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.14/dist-packages/vllm/v1/engine/utils.py", line 1410, in launch_core_engines
+    wait_for_engine_startup(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        handshake_socket,
+        ^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        launch,
+        ^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.14/dist-packages/vllm/v1/engine/utils.py", line 1494, in wait_for_engine_startup
+    raise RuntimeError(
+    ...<8 lines>...
+    )
+RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
+
+--- error lines in /work/logs/rtx-vl5-adaptive.log
+78:(EngineCore pid=2339) ERROR 11-24 16:13:37 [core.py:1764]     assert self._draft_topk is None and not self.enable_adaptive_verification
+80:(EngineCore pid=2339) ERROR 11-24 16:13:37 [core.py:1764] AssertionError
+139:    assert self._draft_topk is None and not self.enable_adaptive_verification
+141:AssertionError
+263:    raise RuntimeError(
+266:RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
+
+=== RUN rtx-vl5-ctl-b: vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{"method": "dspark", "num_speculative_tokens": 7, "draft_sample_method": "probabilistic"}'
+16:15:24 c1 median 190.47 [307.05, 196.14, 174.36, 202.59, 209.1, 164.09, 262.6, 184.8, 178.85, 177.58, 239.65, 165.37]
+16:15:30 c8 aggregate 726.93
+16:15:30 prefill ~4096 20633.5 tok/s over 3302 tokens
+16:15:31 prefill ~32768 20533.0 tok/s over 25554 tokens
+{
+ "name": "rtx-vl5-ctl-b",
+ "time": "2026-11-24T16:14:53",
+ "ttft_short_ms": 40.2,
+ "c1_decode": 190.47,
+ "c1_all": [
+  307.05,
+  196.14,
+  174.36,
+  202.59,
+  209.1,
+  164.09,
+  262.6,
+  184.8,
+  178.85,
+  177.58,
+  239.65,
+  165.37
+ ],
+ "c8_aggregate": 726.93,
+ "c8_per_stream": [
+  112.51,
+  101.17,
+  92.05,
+  92.97,
+  129.43,
+  92.18,
+  131.95,
+  96.89
+ ],
+ "prefill_4096": 20633.5,
+ "prefill_4096_tokens": 3302,
+ "prefill_32768": 20533.0,
+ "prefill_32768_tokens": 25554,
+ "ok": true,
+ "mem_peak_gib": 73.94,
+ "flags": []
+}
+LEDGER {"name": "rtx-vl5-ctl-b", "time": "2026-11-24T16:14:53", "ttft_short_ms": 40.2, "c1_decode": 190.47, "c1_all": [307.05, 196.14, 174.36, 202.59, 209.1, 164.09, 262.6, 184.8, 178.85, 177.58, 239.65, 165.37], "c8_aggregate": 726.93, "c8_per_stream": [112.51, 101.17, 92.05, 92.97, 129.43, 92.18, 131.95, 96.89], "prefill_4096": 20633.5, "prefill_4096_tokens": 3302, "prefill_32768": 20533.0, "prefill_32768_tokens": 25554, "ok": true, "mem_peak_gib": 73.94, "flags": [], "startup_s": 66.0, "warmup_s": 6.5}
+
+Capturing inkling2 dspark CUDA graphs (FULL):   0%|          | 0/48 [00:00<?, ?it/s][A
+Capturing inkling2 dspark CUDA graphs (FULL): 100%|██████████| 48/48 [00:00<00:00, 65.11it/s]
+(EngineCore pid=2693) INFO 11-24 16:14:43 [gpu_worker.py:1233] Free memory on device (94.31/95.03 GiB) on startup. Desired GPU memory utilization is (0.85, 80.78 GiB). Actual usage is 23.09 GiB for consumed memory (weights + non-torch), 4.13 GiB for peak activation, and 1.2 GiB for CUDAGraph memory. Replace gpu_memory_utilization config with `--kv-cache-memory=56062856704` (52.21 GiB) to fit into requested memory, or `--kv-cache-memory=70590451200` (65.74 GiB) to fully utilize gpu memory. Current kv cache memory in use is 53.56 GiB.
+(EngineCore pid=2693) INFO 11-24 16:14:43 [jit_monitor.py:87] Kernel JIT monitor activated; monitored JIT compilations during inference will use mode=warn.
+(EngineCore pid=2693) WARNING 11-24 16:14:44 [extensible_kv_cache.py:669] gpu_memory_utilization=0.85 caps this instance at 80.78 GiB, keeping 6.38 GiB of free device memory out of the KV cache. The extensible KV cache is sized from the memory measured after warmup and CUDA graph capture, so vLLM's own use needs no headroom below 1.0. Leave gpu_memory_utilization unset unless it leaves room for memory vLLM does not measure: other processes sharing the GPU (including ones that allocate on it later), the CPU on a unified-memory device, weight transfer buffers for weight updates, or a KV connector's own device buffers.
+(EngineCore pid=2693) INFO 11-24 16:14:44 [extensible_kv_cache.py:700] Memory after warmup: 68.5 GiB free, 0.02 GiB committed to the KV cache, 9.53 GiB kept for transient activations (9.53 GiB allocated at peak, 3.58 GiB of torch reservation growth); 20680 KV cache blocks (45.44 GiB) fit within the requested 80.78 GiB. Torch may reserve up to 47.69 GiB.
+(EngineCore pid=2693) INFO 11-24 16:14:44 [kv_cache_utils.py:1123] GPU KV cache size: 464,496 tokens, Maximum concurrency for 262,144 tokens per request: 1.77x
+(EngineCore pid=2693) INFO 11-24 16:14:44 [extensible_kv_cache.py:536] Extended KV cache to 20680 blocks (45.44 GiB).
+(EngineCore pid=2693) INFO 11-24 16:14:44 [core.py:444] init engine (profile, create kv cache, warmup model) took 24.20 s
+(EngineCore pid=2693) WARNING 11-24 16:14:46 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _rel_attention_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=2693) WARNING 11-24 16:14:46 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _route_tokens_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=2693) WARNING 11-24 16:14:46 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _scatter_nvfp4_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=2693) WARNING 11-24 16:14:46 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _expert_gemm. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=2693) WARNING 11-24 16:14:46 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _situ_quantize_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=2693) WARNING 11-24 16:14:46 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _mxfp8_gemm. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=2693) WARNING 11-24 16:14:47 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _seq_metadata_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=2693) WARNING 11-24 16:14:47 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _k_group_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=2693) WARNING 11-24 16:14:49 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _ll_gemm_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=2462) INFO 11-24 16:14:55 [loggers.py:347] Engine 000: Avg prompt throughput: 5438.3 tokens/s, Avg generation throughput: 270.9 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 25 reqs, GPU KV cache usage: 0.2%, Prefix cache hit rate: 0.0%
+(APIServer pid=2462) INFO 11-24 16:14:55 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.72, Accepted throughput: 171.31 tokens/s, Drafted throughput: 696.80 tokens/s, Accepted: 1850 tokens, Drafted: 7525 tokens, Verified: 7525 tokens, Per-position acceptance rate: 0.639, 0.403, 0.255, 0.167, 0.115, 0.083, 0.059, Avg Draft acceptance rate: 24.6%
+(APIServer pid=2462) INFO 11-24 16:15:05 [loggers.py:347] Engine 000: Avg prompt throughput: 15.6 tokens/s, Avg generation throughput: 192.7 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 4 reqs, GPU KV cache usage: 0.2%, Prefix cache hit rate: 0.0%
+(APIServer pid=2462) INFO 11-24 16:15:05 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.33, Accepted throughput: 109.70 tokens/s, Drafted throughput: 578.91 tokens/s, Accepted: 1097 tokens, Drafted: 5789 tokens, Verified: 5789 tokens, Per-position acceptance rate: 0.601, 0.320, 0.180, 0.110, 0.064, 0.034, 0.017, Avg Draft acceptance rate: 18.9%
+(APIServer pid=2462) INFO 11-24 16:15:15 [loggers.py:347] Engine 000: Avg prompt throughput: 11.3 tokens/s, Avg generation throughput: 190.6 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 3 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=2462) INFO 11-24 16:15:15 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.30, Accepted throughput: 107.89 tokens/s, Drafted throughput: 581.67 tokens/s, Accepted: 1079 tokens, Drafted: 5817 tokens, Verified: 5817 tokens, Per-position acceptance rate: 0.602, 0.298, 0.177, 0.099, 0.061, 0.036, 0.025, Avg Draft acceptance rate: 18.5%
+(APIServer pid=2462) INFO 11-24 16:15:25 [loggers.py:347] Engine 000: Avg prompt throughput: 42.1 tokens/s, Avg generation throughput: 251.9 tokens/s, Running: 8 reqs, Waiting: 0 reqs, Finished: 4 reqs, GPU KV cache usage: 1.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=2462) INFO 11-24 16:15:25 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.33, Accepted throughput: 143.39 tokens/s, Drafted throughput: 755.93 tokens/s, Accepted: 1434 tokens, Drafted: 7560 tokens, Verified: 7560 tokens, Per-position acceptance rate: 0.575, 0.328, 0.191, 0.107, 0.056, 0.041, 0.030, Avg Draft acceptance rate: 19.0%
+
+=== RUN rtx-vl5-block: vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{"method": "dspark", "num_speculative_tokens": 7, "draft_sample_method": "probabilistic", "rejection_sample_method": "block"}'
+16:17:18 c1 median 190.12 [300.15, 217.83, 184.8, 194.86, 238.22, 160.14, 224.45, 185.38, 182.88, 179.13, 202.04, 172.9]
+16:17:24 c8 aggregate 714.26
+16:17:24 prefill ~4096 20616.3 tok/s over 3302 tokens
+16:17:26 prefill ~32768 20664.8 tok/s over 25554 tokens
+{
+ "name": "rtx-vl5-block",
+ "time": "2026-11-24T16:16:47",
+ "ttft_short_ms": 32.3,
+ "c1_decode": 190.12,
+ "c1_all": [
+  300.15,
+  217.83,
+  184.8,
+  194.86,
+  238.22,
+  160.14,
+  224.45,
+  185.38,
+  182.88,
+  179.13,
+  202.04,
+  172.9
+ ],
+ "c8_aggregate": 714.26,
+ "c8_per_stream": [
+  140.07,
+  101.42,
+  90.45,
+  92.79,
+  114.02,
+  90.83,
+  133.87,
+  97.63
+ ],
+ "prefill_4096": 20616.3,
+ "prefill_4096_tokens": 3302,
+ "prefill_32768": 20664.8,
+ "prefill_32768_tokens": 25554,
+ "ok": true,
+ "mem_peak_gib": 73.94,
+ "flags": []
+}
+LEDGER {"name": "rtx-vl5-block", "time": "2026-11-24T16:16:47", "ttft_short_ms": 32.3, "c1_decode": 190.12, "c1_all": [300.15, 217.83, 184.8, 194.86, 238.22, 160.14, 224.45, 185.38, 182.88, 179.13, 202.04, 172.9], "c8_aggregate": 714.26, "c8_per_stream": [140.07, 101.42, 90.45, 92.79, 114.02, 90.83, 133.87, 97.63], "prefill_4096": 20616.3, "prefill_4096_tokens": 3302, "prefill_32768": 20664.8, "prefill_32768_tokens": 25554, "ok": true, "mem_peak_gib": 73.94, "flags": [], "startup_s": 68.0, "warmup_s": 6.5}
+
+Capturing inkling2 dspark CUDA graphs (FULL):   0%|          | 0/48 [00:00<?, ?it/s][A
+Capturing inkling2 dspark CUDA graphs (FULL): 100%|██████████| 48/48 [00:00<00:00, 65.01it/s]
+(EngineCore pid=3157) INFO 11-24 16:16:37 [gpu_worker.py:1233] Free memory on device (94.31/95.03 GiB) on startup. Desired GPU memory utilization is (0.85, 80.78 GiB). Actual usage is 23.09 GiB for consumed memory (weights + non-torch), 4.13 GiB for peak activation, and 1.2 GiB for CUDAGraph memory. Replace gpu_memory_utilization config with `--kv-cache-memory=56062856704` (52.21 GiB) to fit into requested memory, or `--kv-cache-memory=70590451200` (65.74 GiB) to fully utilize gpu memory. Current kv cache memory in use is 53.56 GiB.
+(EngineCore pid=3157) INFO 11-24 16:16:38 [jit_monitor.py:87] Kernel JIT monitor activated; monitored JIT compilations during inference will use mode=warn.
+(EngineCore pid=3157) WARNING 11-24 16:16:38 [extensible_kv_cache.py:669] gpu_memory_utilization=0.85 caps this instance at 80.78 GiB, keeping 6.38 GiB of free device memory out of the KV cache. The extensible KV cache is sized from the memory measured after warmup and CUDA graph capture, so vLLM's own use needs no headroom below 1.0. Leave gpu_memory_utilization unset unless it leaves room for memory vLLM does not measure: other processes sharing the GPU (including ones that allocate on it later), the CPU on a unified-memory device, weight transfer buffers for weight updates, or a KV connector's own device buffers.
+(EngineCore pid=3157) INFO 11-24 16:16:38 [extensible_kv_cache.py:700] Memory after warmup: 68.5 GiB free, 0.02 GiB committed to the KV cache, 9.53 GiB kept for transient activations (9.53 GiB allocated at peak, 3.58 GiB of torch reservation growth); 20680 KV cache blocks (45.44 GiB) fit within the requested 80.78 GiB. Torch may reserve up to 47.69 GiB.
+(EngineCore pid=3157) INFO 11-24 16:16:38 [kv_cache_utils.py:1123] GPU KV cache size: 464,496 tokens, Maximum concurrency for 262,144 tokens per request: 1.77x
+(EngineCore pid=3157) INFO 11-24 16:16:38 [extensible_kv_cache.py:536] Extended KV cache to 20680 blocks (45.44 GiB).
+(EngineCore pid=3157) INFO 11-24 16:16:38 [core.py:444] init engine (profile, create kv cache, warmup model) took 30.64 s
+(EngineCore pid=3157) WARNING 11-24 16:16:40 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _rel_attention_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=3157) WARNING 11-24 16:16:41 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _route_tokens_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=3157) WARNING 11-24 16:16:41 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _scatter_nvfp4_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=3157) WARNING 11-24 16:16:41 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _expert_gemm. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=3157) WARNING 11-24 16:16:41 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _situ_quantize_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=3157) WARNING 11-24 16:16:41 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _mxfp8_gemm. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=3157) WARNING 11-24 16:16:41 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _seq_metadata_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=3157) WARNING 11-24 16:16:42 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _k_group_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=3157) WARNING 11-24 16:16:43 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _ll_gemm_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=2926) INFO 11-24 16:16:49 [loggers.py:347] Engine 000: Avg prompt throughput: 5481.1 tokens/s, Avg generation throughput: 273.1 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 25 reqs, GPU KV cache usage: 0.2%, Prefix cache hit rate: 0.0%
+(APIServer pid=2926) INFO 11-24 16:16:49 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.75, Accepted throughput: 173.31 tokens/s, Drafted throughput: 692.49 tokens/s, Accepted: 1857 tokens, Drafted: 7420 tokens, Verified: 7420 tokens, Per-position acceptance rate: 0.636, 0.406, 0.269, 0.174, 0.120, 0.086, 0.062, Avg Draft acceptance rate: 25.0%
+(APIServer pid=2926) INFO 11-24 16:16:59 [loggers.py:347] Engine 000: Avg prompt throughput: 15.6 tokens/s, Avg generation throughput: 200.6 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 4 reqs, GPU KV cache usage: 0.2%, Prefix cache hit rate: 0.0%
+(APIServer pid=2926) INFO 11-24 16:16:59 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.43, Accepted throughput: 117.99 tokens/s, Drafted throughput: 576.76 tokens/s, Accepted: 1180 tokens, Drafted: 5768 tokens, Verified: 5768 tokens, Per-position acceptance rate: 0.604, 0.350, 0.210, 0.129, 0.078, 0.041, 0.021, Avg Draft acceptance rate: 20.5%
+(APIServer pid=2926) INFO 11-24 16:17:09 [loggers.py:347] Engine 000: Avg prompt throughput: 11.3 tokens/s, Avg generation throughput: 185.9 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 3 reqs, GPU KV cache usage: 0.3%, Prefix cache hit rate: 0.0%
+(APIServer pid=2926) INFO 11-24 16:17:09 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.26, Accepted throughput: 103.59 tokens/s, Drafted throughput: 576.07 tokens/s, Accepted: 1036 tokens, Drafted: 5761 tokens, Verified: 5761 tokens, Per-position acceptance rate: 0.570, 0.313, 0.174, 0.104, 0.055, 0.026, 0.017, Avg Draft acceptance rate: 18.0%
+(APIServer pid=2926) INFO 11-24 16:17:19 [loggers.py:347] Engine 000: Avg prompt throughput: 42.1 tokens/s, Avg generation throughput: 254.5 tokens/s, Running: 8 reqs, Waiting: 0 reqs, Finished: 4 reqs, GPU KV cache usage: 1.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=2926) INFO 11-24 16:17:19 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.34, Accepted throughput: 145.39 tokens/s, Drafted throughput: 758.07 tokens/s, Accepted: 1454 tokens, Drafted: 7581 tokens, Verified: 7581 tokens, Per-position acceptance rate: 0.562, 0.328, 0.193, 0.107, 0.073, 0.047, 0.032, Avg Draft acceptance rate: 19.2%
+
+=== RUN rtx-vl5-ctl-c: vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{"method": "dspark", "num_speculative_tokens": 7, "draft_sample_method": "probabilistic"}'
+16:19:11 c1 median 190.28 [305.34, 195.96, 173.41, 202.49, 208.04, 164.02, 262.02, 184.6, 178.27, 177.49, 239.01, 165.34]
+16:19:16 c8 aggregate 718.98
+16:19:16 prefill ~4096 20576.5 tok/s over 3302 tokens
+16:19:18 prefill ~32768 20543.0 tok/s over 25554 tokens
+{
+ "name": "rtx-vl5-ctl-c",
+ "time": "2026-11-24T16:18:39",
+ "ttft_short_ms": 40.4,
+ "c1_decode": 190.28,
+ "c1_all": [
+  305.34,
+  195.96,
+  173.41,
+  202.49,
+  208.04,
+  164.02,
+  262.02,
+  184.6,
+  178.27,
+  177.49,
+  239.01,
+  165.34
+ ],
+ "c8_aggregate": 718.98,
+ "c8_per_stream": [
+  120.46,
+  101.82,
+  93.12,
+  94.64,
+  109.42,
+  91.1,
+  119.6,
+  110.52
+ ],
+ "prefill_4096": 20576.5,
+ "prefill_4096_tokens": 3302,
+ "prefill_32768": 20543.0,
+ "prefill_32768_tokens": 25554,
+ "ok": true,
+ "mem_peak_gib": 73.94,
+ "flags": []
+}
+LEDGER {"name": "rtx-vl5-ctl-c", "time": "2026-11-24T16:18:39", "ttft_short_ms": 40.4, "c1_decode": 190.28, "c1_all": [305.34, 195.96, 173.41, 202.49, 208.04, 164.02, 262.02, 184.6, 178.27, 177.49, 239.01, 165.34], "c8_aggregate": 718.98, "c8_per_stream": [120.46, 101.82, 93.12, 94.64, 109.42, 91.1, 119.6, 110.52], "prefill_4096": 20576.5, "prefill_4096_tokens": 3302, "prefill_32768": 20543.0, "prefill_32768_tokens": 25554, "ok": true, "mem_peak_gib": 73.94, "flags": [], "startup_s": 66.0, "warmup_s": 6.4}
+
+Capturing inkling2 dspark CUDA graphs (FULL):   0%|          | 0/48 [00:00<?, ?it/s][A
+Capturing inkling2 dspark CUDA graphs (FULL): 100%|██████████| 48/48 [00:00<00:00, 65.22it/s]
+(EngineCore pid=3627) INFO 11-24 16:18:30 [gpu_worker.py:1233] Free memory on device (94.31/95.03 GiB) on startup. Desired GPU memory utilization is (0.85, 80.78 GiB). Actual usage is 23.09 GiB for consumed memory (weights + non-torch), 4.13 GiB for peak activation, and 1.2 GiB for CUDAGraph memory. Replace gpu_memory_utilization config with `--kv-cache-memory=56064953856` (52.21 GiB) to fit into requested memory, or `--kv-cache-memory=70592548352` (65.74 GiB) to fully utilize gpu memory. Current kv cache memory in use is 53.56 GiB.
+(EngineCore pid=3627) INFO 11-24 16:18:30 [jit_monitor.py:87] Kernel JIT monitor activated; monitored JIT compilations during inference will use mode=warn.
+(EngineCore pid=3627) WARNING 11-24 16:18:31 [extensible_kv_cache.py:669] gpu_memory_utilization=0.85 caps this instance at 80.78 GiB, keeping 6.38 GiB of free device memory out of the KV cache. The extensible KV cache is sized from the memory measured after warmup and CUDA graph capture, so vLLM's own use needs no headroom below 1.0. Leave gpu_memory_utilization unset unless it leaves room for memory vLLM does not measure: other processes sharing the GPU (including ones that allocate on it later), the CPU on a unified-memory device, weight transfer buffers for weight updates, or a KV connector's own device buffers.
+(EngineCore pid=3627) INFO 11-24 16:18:31 [extensible_kv_cache.py:700] Memory after warmup: 68.5 GiB free, 0.02 GiB committed to the KV cache, 9.53 GiB kept for transient activations (9.53 GiB allocated at peak, 3.58 GiB of torch reservation growth); 20680 KV cache blocks (45.44 GiB) fit within the requested 80.78 GiB. Torch may reserve up to 47.69 GiB.
+(EngineCore pid=3627) INFO 11-24 16:18:31 [kv_cache_utils.py:1123] GPU KV cache size: 464,496 tokens, Maximum concurrency for 262,144 tokens per request: 1.77x
+(EngineCore pid=3627) INFO 11-24 16:18:31 [extensible_kv_cache.py:536] Extended KV cache to 20680 blocks (45.44 GiB).
+(EngineCore pid=3627) INFO 11-24 16:18:31 [core.py:444] init engine (profile, create kv cache, warmup model) took 38.22 s
+(EngineCore pid=3627) WARNING 11-24 16:18:32 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _rel_attention_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=3627) WARNING 11-24 16:18:33 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _route_tokens_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=3627) WARNING 11-24 16:18:33 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _scatter_nvfp4_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=3627) WARNING 11-24 16:18:33 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _expert_gemm. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=3627) WARNING 11-24 16:18:33 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _situ_quantize_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=3627) WARNING 11-24 16:18:33 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _mxfp8_gemm. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=3627) WARNING 11-24 16:18:33 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _seq_metadata_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=3627) WARNING 11-24 16:18:34 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _k_group_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=3627) WARNING 11-24 16:18:36 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _ll_gemm_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=3397) INFO 11-24 16:18:42 [loggers.py:347] Engine 000: Avg prompt throughput: 5368.5 tokens/s, Avg generation throughput: 279.2 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 25 reqs, GPU KV cache usage: 0.3%, Prefix cache hit rate: 0.0%
+(APIServer pid=3397) INFO 11-24 16:18:42 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.69, Accepted throughput: 175.69 tokens/s, Drafted throughput: 728.82 tokens/s, Accepted: 1922 tokens, Drafted: 7973 tokens, Verified: 7973 tokens, Per-position acceptance rate: 0.629, 0.400, 0.255, 0.163, 0.111, 0.077, 0.052, Avg Draft acceptance rate: 24.1%
+(APIServer pid=3397) INFO 11-24 16:18:52 [loggers.py:347] Engine 000: Avg prompt throughput: 15.6 tokens/s, Avg generation throughput: 191.2 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 4 reqs, GPU KV cache usage: 0.2%, Prefix cache hit rate: 0.0%
+(APIServer pid=3397) INFO 11-24 16:18:52 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.31, Accepted throughput: 108.39 tokens/s, Drafted throughput: 577.44 tokens/s, Accepted: 1084 tokens, Drafted: 5775 tokens, Verified: 5775 tokens, Per-position acceptance rate: 0.604, 0.319, 0.179, 0.104, 0.059, 0.033, 0.016, Avg Draft acceptance rate: 18.8%
+(APIServer pid=3397) INFO 11-24 16:19:02 [loggers.py:347] Engine 000: Avg prompt throughput: 11.3 tokens/s, Avg generation throughput: 189.4 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 3 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=3397) INFO 11-24 16:19:02 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.29, Accepted throughput: 106.90 tokens/s, Drafted throughput: 580.29 tokens/s, Accepted: 1069 tokens, Drafted: 5803 tokens, Verified: 5803 tokens, Per-position acceptance rate: 0.591, 0.298, 0.177, 0.100, 0.062, 0.036, 0.025, Avg Draft acceptance rate: 18.4%
+(APIServer pid=3397) INFO 11-24 16:19:12 [loggers.py:347] Engine 000: Avg prompt throughput: 42.1 tokens/s, Avg generation throughput: 294.5 tokens/s, Running: 8 reqs, Waiting: 0 reqs, Finished: 4 reqs, GPU KV cache usage: 1.8%, Prefix cache hit rate: 0.0%
+(APIServer pid=3397) INFO 11-24 16:19:12 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.36, Accepted throughput: 169.49 tokens/s, Drafted throughput: 871.43 tokens/s, Accepted: 1695 tokens, Drafted: 8715 tokens, Verified: 8715 tokens, Per-position acceptance rate: 0.584, 0.328, 0.194, 0.118, 0.065, 0.043, 0.031, Avg Draft acceptance rate: 19.4%
+
+=== RUN rtx-vl5-greedydraft: vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{"method": "dspark", "num_speculative_tokens": 7, "draft_sample_method": "greedy"}'
+16:21:01 c1 median 168.6 [272.73, 182.55, 174.19, 156.02, 285.31, 151.01, 251.13, 166.11, 161.13, 166.39, 170.81, 154.07]
+16:21:08 c8 aggregate 606.41
+16:21:08 prefill ~4096 20586.5 tok/s over 3302 tokens
+16:21:09 prefill ~32768 20654.0 tok/s over 25554 tokens
+{
+ "name": "rtx-vl5-greedydraft",
+ "time": "2026-11-24T16:20:26",
+ "ttft_short_ms": 32.4,
+ "c1_decode": 168.6,
+ "c1_all": [
+  272.73,
+  182.55,
+  174.19,
+  156.02,
+  285.31,
+  151.01,
+  251.13,
+  166.11,
+  161.13,
+  166.39,
+  170.81,
+  154.07
+ ],
+ "c8_aggregate": 606.41,
+ "c8_per_stream": [
+  107.76,
+  91.84,
+  80.53,
+  80.16,
+  131.32,
+  76.62,
+  101.35,
+  93.89
+ ],
+ "prefill_4096": 20586.5,
+ "prefill_4096_tokens": 3302,
+ "prefill_32768": 20654.0,
+ "prefill_32768_tokens": 25554,
+ "ok": true,
+ "mem_peak_gib": 73.83,
+ "flags": []
+}
+LEDGER {"name": "rtx-vl5-greedydraft", "time": "2026-11-24T16:20:26", "ttft_short_ms": 32.4, "c1_decode": 168.6, "c1_all": [272.73, 182.55, 174.19, 156.02, 285.31, 151.01, 251.13, 166.11, 161.13, 166.39, 170.81, 154.07], "c8_aggregate": 606.41, "c8_per_stream": [107.76, 91.84, 80.53, 80.16, 131.32, 76.62, 101.35, 93.89], "prefill_4096": 20586.5, "prefill_4096_tokens": 3302, "prefill_32768": 20654.0, "prefill_32768_tokens": 25554, "ok": true, "mem_peak_gib": 73.83, "flags": [], "startup_s": 61.0, "warmup_s": 6.9}
+(EngineCore pid=4090) WARNING 11-24 16:20:17 [extensible_kv_cache.py:669] gpu_memory_utilization=0.85 caps this instance at 80.78 GiB, keeping 5.97 GiB of free device memory out of the KV cache. The extensible KV cache is sized from the memory measured after warmup and CUDA graph capture, so vLLM's own use needs no headroom below 1.0. Leave gpu_memory_utilization unset unless it leaves room for memory vLLM does not measure: other processes sharing the GPU (including ones that allocate on it later), the CPU on a unified-memory device, weight transfer buffers for weight updates, or a KV connector's own device buffers.
+(EngineCore pid=4090) INFO 11-24 16:20:17 [extensible_kv_cache.py:700] Memory after warmup: 71.48 GiB free, 0.02 GiB committed to the KV cache, 10.08 GiB kept for transient activations (10.08 GiB allocated at peak, 3.96 GiB of torch reservation growth); 21792 KV cache blocks (47.88 GiB) fit within the requested 80.78 GiB. Torch may reserve up to 45.25 GiB.
+(EngineCore pid=4090) INFO 11-24 16:20:17 [kv_cache_utils.py:1123] GPU KV cache size: 489,473 tokens, Maximum concurrency for 262,144 tokens per request: 1.87x
+(EngineCore pid=4090) INFO 11-24 16:20:17 [extensible_kv_cache.py:536] Extended KV cache to 21792 blocks (47.88 GiB).
+(EngineCore pid=4090) INFO 11-24 16:20:17 [core.py:444] init engine (profile, create kv cache, warmup model) took 33.26 s
+(EngineCore pid=4090) WARNING 11-24 16:20:20 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _rel_attention_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=4090) WARNING 11-24 16:20:20 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _route_tokens_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=4090) WARNING 11-24 16:20:20 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _scatter_nvfp4_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=4090) WARNING 11-24 16:20:20 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _expert_gemm. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=4090) WARNING 11-24 16:20:20 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _situ_quantize_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=4090) WARNING 11-24 16:20:20 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _mxfp8_gemm. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=4090) WARNING 11-24 16:20:20 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _seq_metadata_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=4090) WARNING 11-24 16:20:21 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _k_group_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=4090) WARNING 11-24 16:20:22 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _gather_draft_sampled_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=4090) WARNING 11-24 16:20:23 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _ll_gemm_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=3860) INFO 11-24 16:20:29 [loggers.py:347] Engine 000: Avg prompt throughput: 5397.3 tokens/s, Avg generation throughput: 256.8 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 25 reqs, GPU KV cache usage: 0.1%, Prefix cache hit rate: 0.0%
+(APIServer pid=3860) INFO 11-24 16:20:29 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.55, Accepted throughput: 156.14 tokens/s, Drafted throughput: 705.07 tokens/s, Accepted: 1699 tokens, Drafted: 7672 tokens, Verified: 7672 tokens, Per-position acceptance rate: 0.594, 0.354, 0.236, 0.146, 0.099, 0.073, 0.047, Avg Draft acceptance rate: 22.1%
+(APIServer pid=3860) INFO 11-24 16:20:39 [loggers.py:347] Engine 000: Avg prompt throughput: 12.2 tokens/s, Avg generation throughput: 178.5 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 3 reqs, GPU KV cache usage: 0.3%, Prefix cache hit rate: 0.0%
+(APIServer pid=3860) INFO 11-24 16:20:39 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.15, Accepted throughput: 95.39 tokens/s, Drafted throughput: 580.96 tokens/s, Accepted: 954 tokens, Drafted: 5810 tokens, Verified: 5810 tokens, Per-position acceptance rate: 0.510, 0.277, 0.160, 0.095, 0.055, 0.034, 0.018, Avg Draft acceptance rate: 16.4%
+(APIServer pid=3860) INFO 11-24 16:20:49 [loggers.py:347] Engine 000: Avg prompt throughput: 14.7 tokens/s, Avg generation throughput: 188.0 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 4 reqs, GPU KV cache usage: 0.2%, Prefix cache hit rate: 0.0%
+(APIServer pid=3860) INFO 11-24 16:20:49 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.27, Accepted throughput: 105.20 tokens/s, Drafted throughput: 578.91 tokens/s, Accepted: 1052 tokens, Drafted: 5789 tokens, Verified: 5789 tokens, Per-position acceptance rate: 0.531, 0.300, 0.180, 0.114, 0.075, 0.046, 0.027, Avg Draft acceptance rate: 18.2%
+(APIServer pid=3860) INFO 11-24 16:20:59 [loggers.py:347] Engine 000: Avg prompt throughput: 11.7 tokens/s, Avg generation throughput: 162.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 3 reqs, GPU KV cache usage: 0.2%, Prefix cache hit rate: 0.0%
+(APIServer pid=3860) INFO 11-24 16:20:59 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 1.95, Accepted throughput: 79.10 tokens/s, Drafted throughput: 585.90 tokens/s, Accepted: 791 tokens, Drafted: 5859 tokens, Verified: 5859 tokens, Per-position acceptance rate: 0.476, 0.226, 0.111, 0.060, 0.033, 0.024, 0.016, Avg Draft acceptance rate: 13.5%
+(APIServer pid=3860) INFO 11-24 16:21:09 [loggers.py:347] Engine 000: Avg prompt throughput: 360.6 tokens/s, Avg generation throughput: 442.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 10 reqs, GPU KV cache usage: 36.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=3860) INFO 11-24 16:21:09 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.12, Accepted throughput: 233.69 tokens/s, Drafted throughput: 1458.71 tokens/s, Accepted: 2337 tokens, Drafted: 14588 tokens, Verified: 14588 tokens, Per-position acceptance rate: 0.528, 0.274, 0.148, 0.079, 0.047, 0.027, 0.019, Avg Draft acceptance rate: 16.0%
+
+=== RUN rtx-vl5-ctl-d: vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{"method": "dspark", "num_speculative_tokens": 7, "draft_sample_method": "probabilistic"}'
+16:22:40 c1 median 191.25 [307.6, 196.97, 174.77, 203.54, 209.16, 164.86, 263.1, 185.52, 179.25, 178.17, 240.78, 165.95]
+16:22:46 c8 aggregate 719.15
+16:22:46 prefill ~4096 20737.8 tok/s over 3302 tokens
+16:22:47 prefill ~32768 20554.0 tok/s over 25554 tokens
+{
+ "name": "rtx-vl5-ctl-d",
+ "time": "2026-11-24T16:22:08",
+ "ttft_short_ms": 40.0,
+ "c1_decode": 191.25,
+ "c1_all": [
+  307.6,
+  196.97,
+  174.77,
+  203.54,
+  209.16,
+  164.86,
+  263.1,
+  185.52,
+  179.25,
+  178.17,
+  240.78,
+  165.95
+ ],
+ "c8_aggregate": 719.15,
+ "c8_per_stream": [
+  120.38,
+  100.55,
+  93.6,
+  96.08,
+  133.59,
+  91.14,
+  110.9,
+  101.0
+ ],
+ "prefill_4096": 20737.8,
+ "prefill_4096_tokens": 3302,
+ "prefill_32768": 20554.0,
+ "prefill_32768_tokens": 25554,
+ "ok": true,
+ "mem_peak_gib": 73.94,
+ "flags": []
+}
+LEDGER {"name": "rtx-vl5-ctl-d", "time": "2026-11-24T16:22:08", "ttft_short_ms": 40.0, "c1_decode": 191.25, "c1_all": [307.6, 196.97, 174.77, 203.54, 209.16, 164.86, 263.1, 185.52, 179.25, 178.17, 240.78, 165.95], "c8_aggregate": 719.15, "c8_per_stream": [120.38, 100.55, 93.6, 96.08, 133.59, 91.14, 110.9, 101.0], "prefill_4096": 20737.8, "prefill_4096_tokens": 3302, "prefill_32768": 20554.0, "prefill_32768_tokens": 25554, "ok": true, "mem_peak_gib": 73.94, "flags": [], "startup_s": 52.0, "warmup_s": 6.5}
+
+Capturing inkling2 dspark CUDA graphs (FULL):   0%|          | 0/48 [00:00<?, ?it/s][A
+Capturing inkling2 dspark CUDA graphs (FULL): 100%|██████████| 48/48 [00:00<00:00, 68.73it/s]
+(EngineCore pid=4578) INFO 11-24 16:21:59 [gpu_worker.py:1233] Free memory on device (94.31/95.03 GiB) on startup. Desired GPU memory utilization is (0.85, 80.78 GiB). Actual usage is 23.09 GiB for consumed memory (weights + non-torch), 4.13 GiB for peak activation, and 1.2 GiB for CUDAGraph memory. Replace gpu_memory_utilization config with `--kv-cache-memory=56064953856` (52.21 GiB) to fit into requested memory, or `--kv-cache-memory=70592548352` (65.74 GiB) to fully utilize gpu memory. Current kv cache memory in use is 53.56 GiB.
+(EngineCore pid=4578) INFO 11-24 16:22:00 [jit_monitor.py:87] Kernel JIT monitor activated; monitored JIT compilations during inference will use mode=warn.
+(EngineCore pid=4578) WARNING 11-24 16:22:00 [extensible_kv_cache.py:669] gpu_memory_utilization=0.85 caps this instance at 80.78 GiB, keeping 6.38 GiB of free device memory out of the KV cache. The extensible KV cache is sized from the memory measured after warmup and CUDA graph capture, so vLLM's own use needs no headroom below 1.0. Leave gpu_memory_utilization unset unless it leaves room for memory vLLM does not measure: other processes sharing the GPU (including ones that allocate on it later), the CPU on a unified-memory device, weight transfer buffers for weight updates, or a KV connector's own device buffers.
+(EngineCore pid=4578) INFO 11-24 16:22:00 [extensible_kv_cache.py:700] Memory after warmup: 68.5 GiB free, 0.02 GiB committed to the KV cache, 9.53 GiB kept for transient activations (9.53 GiB allocated at peak, 3.58 GiB of torch reservation growth); 20680 KV cache blocks (45.44 GiB) fit within the requested 80.78 GiB. Torch may reserve up to 47.69 GiB.
+(EngineCore pid=4578) INFO 11-24 16:22:00 [kv_cache_utils.py:1123] GPU KV cache size: 464,496 tokens, Maximum concurrency for 262,144 tokens per request: 1.77x
+(EngineCore pid=4578) INFO 11-24 16:22:00 [extensible_kv_cache.py:536] Extended KV cache to 20680 blocks (45.44 GiB).
+(EngineCore pid=4578) INFO 11-24 16:22:00 [core.py:444] init engine (profile, create kv cache, warmup model) took 24.23 s
+(EngineCore pid=4578) WARNING 11-24 16:22:02 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _rel_attention_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=4578) WARNING 11-24 16:22:02 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _route_tokens_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=4578) WARNING 11-24 16:22:02 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _scatter_nvfp4_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=4578) WARNING 11-24 16:22:02 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _expert_gemm. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=4578) WARNING 11-24 16:22:02 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _situ_quantize_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=4578) WARNING 11-24 16:22:02 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _mxfp8_gemm. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=4578) WARNING 11-24 16:22:02 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _seq_metadata_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=4578) WARNING 11-24 16:22:03 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _k_group_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=4578) WARNING 11-24 16:22:05 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _ll_gemm_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=4347) INFO 11-24 16:22:12 [loggers.py:347] Engine 000: Avg prompt throughput: 5393.8 tokens/s, Avg generation throughput: 281.0 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 25 reqs, GPU KV cache usage: 0.3%, Prefix cache hit rate: 0.0%
+(APIServer pid=4347) INFO 11-24 16:22:12 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.65, Accepted throughput: 174.50 tokens/s, Drafted throughput: 739.97 tokens/s, Accepted: 1900 tokens, Drafted: 8057 tokens, Verified: 8057 tokens, Per-position acceptance rate: 0.627, 0.389, 0.244, 0.156, 0.107, 0.077, 0.050, Avg Draft acceptance rate: 23.6%
+(APIServer pid=4347) INFO 11-24 16:22:22 [loggers.py:347] Engine 000: Avg prompt throughput: 15.6 tokens/s, Avg generation throughput: 193.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 4 reqs, GPU KV cache usage: 0.2%, Prefix cache hit rate: 0.0%
+(APIServer pid=4347) INFO 11-24 16:22:22 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.33, Accepted throughput: 110.00 tokens/s, Drafted throughput: 580.98 tokens/s, Accepted: 1100 tokens, Drafted: 5810 tokens, Verified: 5810 tokens, Per-position acceptance rate: 0.607, 0.320, 0.183, 0.106, 0.060, 0.033, 0.016, Avg Draft acceptance rate: 18.9%
+(APIServer pid=4347) INFO 11-24 16:22:32 [loggers.py:347] Engine 000: Avg prompt throughput: 15.4 tokens/s, Avg generation throughput: 190.2 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 4 reqs, GPU KV cache usage: 0.1%, Prefix cache hit rate: 0.0%
+(APIServer pid=4347) INFO 11-24 16:22:32 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.30, Accepted throughput: 107.70 tokens/s, Drafted throughput: 581.69 tokens/s, Accepted: 1077 tokens, Drafted: 5817 tokens, Verified: 5817 tokens, Per-position acceptance rate: 0.588, 0.298, 0.178, 0.101, 0.064, 0.039, 0.028, Avg Draft acceptance rate: 18.5%
+(APIServer pid=4347) INFO 11-24 16:22:42 [loggers.py:347] Engine 000: Avg prompt throughput: 38.0 tokens/s, Avg generation throughput: 303.8 tokens/s, Running: 8 reqs, Waiting: 0 reqs, Finished: 3 reqs, GPU KV cache usage: 1.8%, Prefix cache hit rate: 0.0%
+(APIServer pid=4347) INFO 11-24 16:22:42 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.35, Accepted throughput: 174.08 tokens/s, Drafted throughput: 903.58 tokens/s, Accepted: 1741 tokens, Drafted: 9037 tokens, Verified: 9037 tokens, Per-position acceptance rate: 0.579, 0.329, 0.193, 0.121, 0.063, 0.036, 0.027, Avg Draft acceptance rate: 19.3%
+
+=== RUN rtx-vl5-lmhfp8: vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{"method": "dspark", "num_speculative_tokens": 7, "draft_sample_method": "probabilistic", "draft_lm_head_quantization": "fp8"}'
+server exited with 1
+LEDGER {"name": "rtx-vl5-lmhfp8", "ok": false, "error": "server did not become healthy", "startup_s": 11.0}
+--- tail of /work/logs/rtx-vl5-lmhfp8.log
+    async with build_async_engine_client(
+               ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        args,
+        ^^^^^
+        client_config=client_config,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as engine_client:
+    ^
+  File "/usr/lib/python3.14/contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.14/dist-packages/vllm/entrypoints/launchers/api_server/entry.py", line 60, in build_async_engine_client
+    async with build_async_engine_client_from_engine_args(
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        engine_args,
+        ^^^^^^^^^^^^
+        usage_context=usage_context,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        client_config=client_config,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as engine:
+    ^
+  File "/usr/lib/python3.14/contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.14/dist-packages/vllm/entrypoints/launchers/api_server/entry.py", line 82, in build_async_engine_client_from_engine_args
+    vllm_config = engine_args.create_engine_config(usage_context=usage_context)
+  File "/usr/local/lib/python3.14/dist-packages/vllm/engine/arg_utils.py", line 2650, in create_engine_config
+    speculative_config = self.create_speculative_config(
+        target_model_config=model_config,
+        target_parallel_config=parallel_config,
+    )
+  File "/usr/local/lib/python3.14/dist-packages/vllm/engine/arg_utils.py", line 2150, in create_speculative_config
+    return SpeculativeConfig(**self.speculative_config)
+  File "/usr/local/lib/python3.14/dist-packages/pydantic/_internal/_dataclasses.py", line 121, in __init__
+    s.__pydantic_validator__.validate_python(ArgsKwargs(args, kwargs), self_instance=s)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for SpeculativeConfig
+  Value error, draft_lm_head_quantization is only supported by the DeepSeek-V4/V4.1 DSpark drafters [type=value_error, input_value=ArgsKwargs((), {'method':...ailure_policy='fail'))}), input_type=ArgsKwargs]
+    For further information visit https://errors.pydantic.dev/2.14/v/value_error
+
+--- error lines in /work/logs/rtx-vl5-lmhfp8.log
+86:pydantic_core._pydantic_core.ValidationError: 1 validation error for SpeculativeConfig
+87:  Value error, draft_lm_head_quantization is only supported by the DeepSeek-V4/V4.1 DSpark drafters [type=value_error, input_value=ArgsKwargs((), {'method':...ailure_policy='fail'))}), input_type=ArgsKwargs]
+88:    For further information visit https://errors.pydantic.dev/2.14/v/value_error
+
+=== RUN rtx-vl5-ctl-e: vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{"method": "dspark", "num_speculative_tokens": 7, "draft_sample_method": "probabilistic"}'
+16:24:28 c1 median 190.84 [307.55, 196.62, 174.74, 203.07, 209.53, 164.2, 263.34, 185.05, 179.47, 177.67, 240.16, 165.85]
+16:24:34 c8 aggregate 722.64
+16:24:34 prefill ~4096 20621.9 tok/s over 3302 tokens
+16:24:35 prefill ~32768 20648.3 tok/s over 25554 tokens
+{
+ "name": "rtx-vl5-ctl-e",
+ "time": "2026-11-24T16:23:57",
+ "ttft_short_ms": 40.0,
+ "c1_decode": 190.84,
+ "c1_all": [
+  307.55,
+  196.62,
+  174.74,
+  203.07,
+  209.53,
+  164.2,
+  263.34,
+  185.05,
+  179.47,
+  177.67,
+  240.16,
+  165.85
+ ],
+ "c8_aggregate": 722.64,
+ "c8_per_stream": [
+  113.14,
+  101.33,
+  91.27,
+  97.74,
+  97.34,
+  93.61,
+  133.65,
+  97.34
+ ],
+ "prefill_4096": 20621.9,
+ "prefill_4096_tokens": 3302,
+ "prefill_32768": 20648.3,
+ "prefill_32768_tokens": 25554,
+ "ok": true,
+ "mem_peak_gib": 73.93,
+ "flags": []
+}
+LEDGER {"name": "rtx-vl5-ctl-e", "time": "2026-11-24T16:23:57", "ttft_short_ms": 40.0, "c1_decode": 190.84, "c1_all": [307.55, 196.62, 174.74, 203.07, 209.53, 164.2, 263.34, 185.05, 179.47, 177.67, 240.16, 165.85], "c8_aggregate": 722.64, "c8_per_stream": [113.14, 101.33, 91.27, 97.74, 97.34, 93.61, 133.65, 97.34], "prefill_4096": 20621.9, "prefill_4096_tokens": 3302, "prefill_32768": 20648.3, "prefill_32768_tokens": 25554, "ok": true, "mem_peak_gib": 73.93, "flags": [], "startup_s": 51.0, "warmup_s": 6.5}
+
+Capturing inkling2 dspark CUDA graphs (FULL):   0%|          | 0/48 [00:00<?, ?it/s][A
+Capturing inkling2 dspark CUDA graphs (FULL): 100%|██████████| 48/48 [00:00<00:00, 64.82it/s]
+(EngineCore pid=5247) INFO 11-24 16:23:48 [gpu_worker.py:1233] Free memory on device (94.31/95.03 GiB) on startup. Desired GPU memory utilization is (0.85, 80.78 GiB). Actual usage is 23.09 GiB for consumed memory (weights + non-torch), 4.13 GiB for peak activation, and 1.2 GiB for CUDAGraph memory. Replace gpu_memory_utilization config with `--kv-cache-memory=56064953856` (52.21 GiB) to fit into requested memory, or `--kv-cache-memory=70592548352` (65.74 GiB) to fully utilize gpu memory. Current kv cache memory in use is 53.56 GiB.
+(EngineCore pid=5247) INFO 11-24 16:23:48 [jit_monitor.py:87] Kernel JIT monitor activated; monitored JIT compilations during inference will use mode=warn.
+(EngineCore pid=5247) WARNING 11-24 16:23:48 [extensible_kv_cache.py:669] gpu_memory_utilization=0.85 caps this instance at 80.78 GiB, keeping 6.38 GiB of free device memory out of the KV cache. The extensible KV cache is sized from the memory measured after warmup and CUDA graph capture, so vLLM's own use needs no headroom below 1.0. Leave gpu_memory_utilization unset unless it leaves room for memory vLLM does not measure: other processes sharing the GPU (including ones that allocate on it later), the CPU on a unified-memory device, weight transfer buffers for weight updates, or a KV connector's own device buffers.
+(EngineCore pid=5247) INFO 11-24 16:23:48 [extensible_kv_cache.py:700] Memory after warmup: 68.5 GiB free, 0.02 GiB committed to the KV cache, 9.53 GiB kept for transient activations (9.53 GiB allocated at peak, 3.58 GiB of torch reservation growth); 20680 KV cache blocks (45.44 GiB) fit within the requested 80.78 GiB. Torch may reserve up to 47.69 GiB.
+(EngineCore pid=5247) INFO 11-24 16:23:48 [kv_cache_utils.py:1123] GPU KV cache size: 464,496 tokens, Maximum concurrency for 262,144 tokens per request: 1.77x
+(EngineCore pid=5247) INFO 11-24 16:23:48 [extensible_kv_cache.py:536] Extended KV cache to 20680 blocks (45.44 GiB).
+(EngineCore pid=5247) INFO 11-24 16:23:48 [core.py:444] init engine (profile, create kv cache, warmup model) took 24.12 s
+(EngineCore pid=5247) WARNING 11-24 16:23:50 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _rel_attention_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=5247) WARNING 11-24 16:23:50 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _route_tokens_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=5247) WARNING 11-24 16:23:50 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _scatter_nvfp4_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=5247) WARNING 11-24 16:23:50 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _expert_gemm. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=5247) WARNING 11-24 16:23:50 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _situ_quantize_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=5247) WARNING 11-24 16:23:50 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _mxfp8_gemm. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=5247) WARNING 11-24 16:23:51 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _seq_metadata_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=5247) WARNING 11-24 16:23:51 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _k_group_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=5247) WARNING 11-24 16:23:53 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _ll_gemm_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=5016) INFO 11-24 16:24:00 [loggers.py:347] Engine 000: Avg prompt throughput: 5574.8 tokens/s, Avg generation throughput: 283.2 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 25 reqs, GPU KV cache usage: 0.3%, Prefix cache hit rate: 0.0%
+(APIServer pid=5016) INFO 11-24 16:24:00 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.67, Accepted throughput: 177.03 tokens/s, Drafted throughput: 741.54 tokens/s, Accepted: 1865 tokens, Drafted: 7812 tokens, Verified: 7812 tokens, Per-position acceptance rate: 0.629, 0.394, 0.250, 0.161, 0.109, 0.076, 0.051, Avg Draft acceptance rate: 23.9%
+(APIServer pid=5016) INFO 11-24 16:24:10 [loggers.py:347] Engine 000: Avg prompt throughput: 15.6 tokens/s, Avg generation throughput: 191.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 4 reqs, GPU KV cache usage: 0.1%, Prefix cache hit rate: 0.0%
+(APIServer pid=5016) INFO 11-24 16:24:10 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.30, Accepted throughput: 108.00 tokens/s, Drafted throughput: 580.99 tokens/s, Accepted: 1080 tokens, Drafted: 5810 tokens, Verified: 5810 tokens, Per-position acceptance rate: 0.595, 0.314, 0.177, 0.106, 0.060, 0.033, 0.016, Avg Draft acceptance rate: 18.6%
+(APIServer pid=5016) INFO 11-24 16:24:20 [loggers.py:347] Engine 000: Avg prompt throughput: 11.3 tokens/s, Avg generation throughput: 191.8 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 3 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=5016) INFO 11-24 16:24:20 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.31, Accepted throughput: 108.99 tokens/s, Drafted throughput: 582.35 tokens/s, Accepted: 1090 tokens, Drafted: 5824 tokens, Verified: 5824 tokens, Per-position acceptance rate: 0.605, 0.303, 0.180, 0.100, 0.061, 0.036, 0.025, Avg Draft acceptance rate: 18.7%
+(APIServer pid=5016) INFO 11-24 16:24:30 [loggers.py:347] Engine 000: Avg prompt throughput: 42.1 tokens/s, Avg generation throughput: 266.0 tokens/s, Running: 8 reqs, Waiting: 0 reqs, Finished: 4 reqs, GPU KV cache usage: 1.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=5016) INFO 11-24 16:24:30 [metrics.py:136] SpecDecoding metrics: Mean acceptance length: 2.27, Accepted throughput: 148.29 tokens/s, Drafted throughput: 820.37 tokens/s, Accepted: 1483 tokens, Drafted: 8204 tokens, Verified: 8204 tokens, Per-position acceptance rate: 0.569, 0.322, 0.177, 0.096, 0.048, 0.031, 0.023, Avg Draft acceptance rate: 18.1%
+
+=== LEDGER TABLE
+name                         c1_decode  c8_aggregate  prefill_4096 prefill_32768 ttft_short_ms     startup_s  mem_peak_gib  flags
+rtx-vl5-ctl-a                   190.25        721.71       20614.5        4730.6          40.5         414.2         73.94  
+rtx-vl5-adaptive                     -             -             -             -             -          23.0             -  
+rtx-vl5-ctl-b                   190.47        726.93       20633.5       20533.0          40.2          66.0         73.94  
+rtx-vl5-block                   190.12        714.26       20616.3       20664.8          32.3          68.0         73.94  
+rtx-vl5-ctl-c                   190.28        718.98       20576.5       20543.0          40.4          66.0         73.94  
+rtx-vl5-greedydraft              168.6        606.41       20586.5       20654.0          32.4          61.0         73.83  
+rtx-vl5-ctl-d                   191.25        719.15       20737.8       20554.0          40.0          52.0         73.94  
+rtx-vl5-lmhfp8                       -             -             -             -             -          11.0             -  
+rtx-vl5-ctl-e                   190.84        722.64       20621.9       20648.3          40.0          51.0         73.93  
