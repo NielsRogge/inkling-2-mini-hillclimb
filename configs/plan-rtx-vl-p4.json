@@ -1,0 +1,47 @@
+[
+ {
+  "name": "rtx-vl4-ds7-a",
+  "cmd": "vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{\"method\": \"dspark\", \"num_speculative_tokens\": 7, \"draft_sample_method\": \"probabilistic\"}'",
+  "reps": 12
+ },
+ {
+  "name": "rtx-vl4-base-a",
+  "cmd": "vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85",
+  "reps": 12
+ },
+ {
+  "name": "rtx-vl4-ds4-a",
+  "cmd": "vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{\"method\": \"dspark\", \"num_speculative_tokens\": 4, \"draft_sample_method\": \"probabilistic\"}'",
+  "reps": 12
+ },
+ {
+  "name": "rtx-vl4-ds7-b",
+  "cmd": "vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{\"method\": \"dspark\", \"num_speculative_tokens\": 7, \"draft_sample_method\": \"probabilistic\"}'",
+  "reps": 12
+ },
+ {
+  "name": "rtx-vl4-ds5-a",
+  "cmd": "vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{\"method\": \"dspark\", \"num_speculative_tokens\": 5, \"draft_sample_method\": \"probabilistic\"}'",
+  "reps": 12
+ },
+ {
+  "name": "rtx-vl4-base-b",
+  "cmd": "vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85",
+  "reps": 12
+ },
+ {
+  "name": "rtx-vl4-ds7-c",
+  "cmd": "vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{\"method\": \"dspark\", \"num_speculative_tokens\": 7, \"draft_sample_method\": \"probabilistic\"}'",
+  "reps": 12
+ },
+ {
+  "name": "rtx-vl4-ds3-a",
+  "cmd": "vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{\"method\": \"dspark\", \"num_speculative_tokens\": 3, \"draft_sample_method\": \"probabilistic\"}'",
+  "reps": 12
+ },
+ {
+  "name": "rtx-vl4-ds7-d",
+  "cmd": "vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{\"method\": \"dspark\", \"num_speculative_tokens\": 7, \"draft_sample_method\": \"probabilistic\"}'",
+  "reps": 12
+ }
+]

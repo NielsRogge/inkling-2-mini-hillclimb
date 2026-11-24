@@ -1,0 +1,123 @@
+=== RUN rtx-vl3-base-a: vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144
+15:48:32 c1 median 156.79 [157.17, 156.8, 156.7, 156.76, 156.72, 156.74, 156.78, 156.82, 156.78, 156.83, 156.84, 156.86]
+15:48:38 c8 aggregate 634.67
+15:48:38 prefill ~4096 20624.9 tok/s over 3302 tokens
+15:48:44 prefill ~32768 4859.5 tok/s over 25554 tokens
+{
+ "name": "rtx-vl3-base-a",
+ "time": "2026-11-24T15:47:50",
+ "ttft_short_ms": 33.0,
+ "c1_decode": 156.79,
+ "c1_all": [
+  157.17,
+  156.8,
+  156.7,
+  156.76,
+  156.72,
+  156.74,
+  156.78,
+  156.82,
+  156.78,
+  156.83,
+  156.84,
+  156.86
+ ],
+ "c8_aggregate": 634.67,
+ "c8_per_stream": [
+  80.24,
+  80.18,
+  80.18,
+  80.18,
+  80.18,
+  80.18,
+  80.17,
+  80.17
+ ],
+ "prefill_4096": 20624.9,
+ "prefill_4096_tokens": 3302,
+ "prefill_32768": 4859.5,
+ "prefill_32768_tokens": 25554,
+ "ok": true,
+ "mem_peak_gib": 91.55,
+ "flags": []
+}
+LEDGER {"name": "rtx-vl3-base-a", "time": "2026-11-24T15:47:50", "ttft_short_ms": 33.0, "c1_decode": 156.79, "c1_all": [157.17, 156.8, 156.7, 156.76, 156.72, 156.74, 156.78, 156.82, 156.78, 156.83, 156.84, 156.86], "c8_aggregate": 634.67, "c8_per_stream": [80.24, 80.18, 80.18, 80.18, 80.18, 80.18, 80.17, 80.17], "prefill_4096": 20624.9, "prefill_4096_tokens": 3302, "prefill_32768": 4859.5, "prefill_32768_tokens": 25554, "ok": true, "mem_peak_gib": 91.55, "flags": [], "startup_s": 347.2, "warmup_s": 36.1}
+(EngineCore pid=903) INFO 11-24 15:47:12 [core.py:444] init engine (profile, create kv cache, warmup model) took 285.74 s
+(EngineCore pid=903) INFO 11-24 15:47:12 [compilation.py:428] Enabled custom fusions: norm_quant, act_quant
+(EngineCore pid=903) WARNING 11-24 15:47:15 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _rel_attention_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=903) WARNING 11-24 15:47:15 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _rel_decode_combine_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=903) WARNING 11-24 15:47:17 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _attn_prologue_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=903) WARNING 11-24 15:47:20 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _qr_rel_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=903) WARNING 11-24 15:47:22 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _sconv_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=903) WARNING 11-24 15:47:22 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _k_group_tma_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=903) WARNING 11-24 15:47:23 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _route_tokens_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=903) WARNING 11-24 15:47:23 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _expert_gemm. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=446) INFO 11-24 15:47:23 [loggers.py:347] Engine 000: Avg prompt throughput: 1.7 tokens/s, Avg generation throughput: 5.9 tokens/s, Running: 0 reqs, Waiting: 0 reqs, Finished: 1 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(EngineCore pid=903) WARNING 11-24 15:47:24 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _situ_quantize_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=903) WARNING 11-24 15:47:24 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _combine_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=903) WARNING 11-24 15:47:25 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _attn_res_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=446) INFO 11-24 15:47:33 [loggers.py:347] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, Finished: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(EngineCore pid=903) WARNING 11-24 15:47:34 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _mxfp8_gemm. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=903) WARNING 11-24 15:47:36 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _seq_metadata_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=903) WARNING 11-24 15:47:39 [jit_monitor.py:143] Triton kernel JIT compilation during inference: _k_group_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=446) INFO 11-24 15:47:43 [loggers.py:347] Engine 000: Avg prompt throughput: 330.4 tokens/s, Avg generation throughput: 1.6 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 1 reqs, GPU KV cache usage: 23.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=446) INFO 11-24 15:47:53 [loggers.py:347] Engine 000: Avg prompt throughput: 5536.4 tokens/s, Avg generation throughput: 269.0 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 22 reqs, GPU KV cache usage: 0.2%, Prefix cache hit rate: 0.0%
+(APIServer pid=446) INFO 11-24 15:48:03 [loggers.py:347] Engine 000: Avg prompt throughput: 11.5 tokens/s, Avg generation throughput: 119.4 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 3 reqs, GPU KV cache usage: 0.1%, Prefix cache hit rate: 0.0%
+(APIServer pid=446) INFO 11-24 15:48:13 [loggers.py:347] Engine 000: Avg prompt throughput: 11.5 tokens/s, Avg generation throughput: 155.2 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 3 reqs, GPU KV cache usage: 0.1%, Prefix cache hit rate: 0.0%
+(APIServer pid=446) INFO 11-24 15:48:23 [loggers.py:347] Engine 000: Avg prompt throughput: 11.5 tokens/s, Avg generation throughput: 155.4 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 3 reqs, GPU KV cache usage: 0.1%, Prefix cache hit rate: 0.0%
+(APIServer pid=446) INFO 11-24 15:48:33 [loggers.py:347] Engine 000: Avg prompt throughput: 38.0 tokens/s, Avg generation throughput: 225.9 tokens/s, Running: 8 reqs, Waiting: 0 reqs, Finished: 3 reqs, GPU KV cache usage: 0.6%, Prefix cache hit rate: 0.0%
+(APIServer pid=446) INFO 11-24 15:48:43 [loggers.py:347] Engine 000: Avg prompt throughput: 330.2 tokens/s, Avg generation throughput: 317.6 tokens/s, Running: 1 reqs, Waiting: 0 reqs, Finished: 9 reqs, GPU KV cache usage: 23.0%, Prefix cache hit rate: 0.0%
+
+=== RUN rtx-vl3-ds7-a: vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --speculative-config '{"method": "dspark", "num_speculative_tokens": 7, "draft_sample_method": "probabilistic"}'
+server exited with 1
+LEDGER {"name": "rtx-vl3-ds7-a", "ok": false, "error": "server did not become healthy", "startup_s": 95.0}
+--- tail of /work/logs/rtx-vl3-ds7-a.log
+        *client_args,
+        renderer=renderer,
+    )
+  File "/usr/local/lib/python3.14/dist-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.14/dist-packages/vllm/v1/engine/core_client.py", line 1198, in __init__
+    super().__init__(
+    ~~~~~~~~~~~~~~~~^
+        asyncio_mode=True,
+        ^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        renderer=renderer,
+        ^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.14/dist-packages/vllm/v1/engine/core_client.py", line 731, in __init__
+    with launch_core_engines(
+         ~~~~~~~~~~~~~~~~~~~^
+        vllm_config, executor_class, collect_stats, addresses
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as engine_launch:
+    ^
+  File "/usr/lib/python3.14/contextlib.py", line 148, in __exit__
+    next(self.gen)
+    ~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.14/dist-packages/vllm/v1/engine/utils.py", line 1410, in launch_core_engines
+    wait_for_engine_startup(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        handshake_socket,
+        ^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        launch,
+        ^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.14/dist-packages/vllm/v1/engine/utils.py", line 1494, in wait_for_engine_startup
+    raise RuntimeError(
+    ...<8 lines>...
+    )
+RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
+
+--- error lines in /work/logs/rtx-vl3-ds7-a.log
+56:(EngineCore pid=2192) WARNING 11-24 15:49:30 [speculator.py:325] Draft model Inkling2DSparkModel does not support external multimodal embeddings. Embeddings from the target model will not be passed to the drafter; using text-only draft inputs instead.
+176:(EngineCore pid=2192) ERROR 11-24 15:50:16 [core.py:1764] torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 5.07 GiB. GPU 0 has a total capacity of 95.03 GiB of which 1.90 GiB is free. Including non-PyTorch memory, this process has 93.12 GiB memory in use. Of the allocated memory 29.31 GiB is allocated by PyTorch, with 1024.00 KiB allocated in private pools (e.g., CUDA Graphs), and 5.15 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+275:torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 5.07 GiB. GPU 0 has a total capacity of 95.03 GiB of which 1.90 GiB is free. Including non-PyTorch memory, this process has 93.12 GiB memory in use. Of the allocated memory 29.31 GiB is allocated by PyTorch, with 1024.00 KiB allocated in private pools (e.g., CUDA Graphs), and 5.15 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+397:    raise RuntimeError(
+400:RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
+
+=== RUN rtx-vl3-base-b: vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144
