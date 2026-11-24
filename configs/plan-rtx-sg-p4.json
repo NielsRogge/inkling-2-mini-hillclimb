@@ -1,0 +1,62 @@
+[
+ {
+  "name": "rtx-sg4-ctl-a",
+  "cmd": "python3 -m sglang.launch_server --model-path thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tp 1 --ep 1 --reasoning-parser inkling --tool-call-parser inkling2 --attention-backend fa4 --max-running-requests 4 --speculative-algorithm DSPARK --speculative-num-draft-tokens 8",
+  "concurrency": 4,
+  "reps": 12
+ },
+ {
+  "name": "rtx-sg4-mega-a",
+  "cmd": "SGLANG_ENABLE_NV_MEGA_RUNTIME_OPTIMIZATION=1 python3 -m sglang.launch_server --model-path thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tp 1 --ep 1 --reasoning-parser inkling --tool-call-parser inkling2 --attention-backend fa4 --max-running-requests 4 --speculative-algorithm DSPARK --speculative-num-draft-tokens 8",
+  "concurrency": 4,
+  "reps": 12
+ },
+ {
+  "name": "rtx-sg4-ctl-b",
+  "cmd": "python3 -m sglang.launch_server --model-path thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tp 1 --ep 1 --reasoning-parser inkling --tool-call-parser inkling2 --attention-backend fa4 --max-running-requests 4 --speculative-algorithm DSPARK --speculative-num-draft-tokens 8",
+  "concurrency": 4,
+  "reps": 12
+ },
+ {
+  "name": "rtx-sg4-mega-b",
+  "cmd": "SGLANG_ENABLE_NV_MEGA_RUNTIME_OPTIMIZATION=1 python3 -m sglang.launch_server --model-path thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tp 1 --ep 1 --reasoning-parser inkling --tool-call-parser inkling2 --attention-backend fa4 --max-running-requests 4 --speculative-algorithm DSPARK --speculative-num-draft-tokens 8",
+  "concurrency": 4,
+  "reps": 12
+ },
+ {
+  "name": "rtx-sg4-ctl-c",
+  "cmd": "python3 -m sglang.launch_server --model-path thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tp 1 --ep 1 --reasoning-parser inkling --tool-call-parser inkling2 --attention-backend fa4 --max-running-requests 4 --speculative-algorithm DSPARK --speculative-num-draft-tokens 8",
+  "concurrency": 4,
+  "reps": 12
+ },
+ {
+  "name": "rtx-sg4-mega-greedy",
+  "cmd": "SGLANG_ENABLE_NV_MEGA_RUNTIME_OPTIMIZATION=1 SGLANG_DSPARK_USE_GREEDY_DRAFT=1 python3 -m sglang.launch_server --model-path thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tp 1 --ep 1 --reasoning-parser inkling --tool-call-parser inkling2 --attention-backend fa4 --max-running-requests 4 --speculative-algorithm DSPARK --speculative-num-draft-tokens 8",
+  "concurrency": 4,
+  "reps": 12
+ },
+ {
+  "name": "rtx-sg4-mega-c",
+  "cmd": "SGLANG_ENABLE_NV_MEGA_RUNTIME_OPTIMIZATION=1 python3 -m sglang.launch_server --model-path thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tp 1 --ep 1 --reasoning-parser inkling --tool-call-parser inkling2 --attention-backend fa4 --max-running-requests 4 --speculative-algorithm DSPARK --speculative-num-draft-tokens 8",
+  "concurrency": 4,
+  "reps": 12
+ },
+ {
+  "name": "rtx-sg4-mega-mrr8",
+  "cmd": "SGLANG_ENABLE_NV_MEGA_RUNTIME_OPTIMIZATION=1 python3 -m sglang.launch_server --model-path thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tp 1 --ep 1 --reasoning-parser inkling --tool-call-parser inkling2 --attention-backend fa4 --max-running-requests 8 --speculative-algorithm DSPARK --speculative-num-draft-tokens 8",
+  "concurrency": 8,
+  "reps": 12
+ },
+ {
+  "name": "rtx-sg4-mega-d",
+  "cmd": "SGLANG_ENABLE_NV_MEGA_RUNTIME_OPTIMIZATION=1 python3 -m sglang.launch_server --model-path thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tp 1 --ep 1 --reasoning-parser inkling --tool-call-parser inkling2 --attention-backend fa4 --max-running-requests 4 --speculative-algorithm DSPARK --speculative-num-draft-tokens 8",
+  "concurrency": 4,
+  "reps": 12
+ },
+ {
+  "name": "rtx-sg4-mega-mrr8-c8ctl",
+  "cmd": "SGLANG_ENABLE_NV_MEGA_RUNTIME_OPTIMIZATION=1 python3 -m sglang.launch_server --model-path thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tp 1 --ep 1 --reasoning-parser inkling --tool-call-parser inkling2 --attention-backend fa4 --max-running-requests 4 --speculative-algorithm DSPARK --speculative-num-draft-tokens 8",
+  "concurrency": 8,
+  "reps": 12
+ }
+]

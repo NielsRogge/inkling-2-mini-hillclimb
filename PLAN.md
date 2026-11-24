@@ -32,3 +32,4 @@ Every candidate is run between controls in the same Job (ctl / cand / ctl).
 - rtx-sg3 FUSED_DRAFT_SAMPLE=1: c1 171.8 vs controls 168.9 / 168.4 (+1.9%), c4 411 vs 378 / 402. **Reject (inside noise).**
 - vLLM round 3: ds7 OOM at startup (`Tried to allocate 5.07 GiB … 1.90 GiB free`). The new "extensible KV cache" takes all memory left after warmup, leaving none for the DSpark drafter allocation. Fix: `--gpu-memory-utilization 0.85` on **all** runs. Round 4 puts ds7 first so a failure costs little.
 - rtx-sg3 MOE_QUANT_ONCE=1: c1 170.5 vs controls 168.4 / 169.3 (+1%), c4 408 vs 402 / 414. **Reject (no effect).**
+- SGLang round 3 complete (last control ctl-e: c1 169.8, c4 406). Round 4 submitted: MEGA repeats interleaved with controls; on top of MEGA, greedy draft (SGLANG_DSPARK_USE_GREEDY_DRAFT=1) and max-running-requests 8 (measured at c8, against a MEGA mrr4 run also measured at c8).
