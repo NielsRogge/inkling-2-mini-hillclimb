@@ -1,0 +1,47 @@
+[
+ {
+  "name": "rtx-vl5-ctl-a",
+  "cmd": "vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{\"method\": \"dspark\", \"num_speculative_tokens\": 7, \"draft_sample_method\": \"probabilistic\"}'",
+  "reps": 12
+ },
+ {
+  "name": "rtx-vl5-adaptive",
+  "cmd": "vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{\"method\": \"dspark\", \"num_speculative_tokens\": 7, \"draft_sample_method\": \"probabilistic\", \"enable_adaptive_verification\": true}'",
+  "reps": 12
+ },
+ {
+  "name": "rtx-vl5-ctl-b",
+  "cmd": "vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{\"method\": \"dspark\", \"num_speculative_tokens\": 7, \"draft_sample_method\": \"probabilistic\"}'",
+  "reps": 12
+ },
+ {
+  "name": "rtx-vl5-block",
+  "cmd": "vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{\"method\": \"dspark\", \"num_speculative_tokens\": 7, \"draft_sample_method\": \"probabilistic\", \"rejection_sample_method\": \"block\"}'",
+  "reps": 12
+ },
+ {
+  "name": "rtx-vl5-ctl-c",
+  "cmd": "vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{\"method\": \"dspark\", \"num_speculative_tokens\": 7, \"draft_sample_method\": \"probabilistic\"}'",
+  "reps": 12
+ },
+ {
+  "name": "rtx-vl5-greedydraft",
+  "cmd": "vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{\"method\": \"dspark\", \"num_speculative_tokens\": 7, \"draft_sample_method\": \"greedy\"}'",
+  "reps": 12
+ },
+ {
+  "name": "rtx-vl5-ctl-d",
+  "cmd": "vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{\"method\": \"dspark\", \"num_speculative_tokens\": 7, \"draft_sample_method\": \"probabilistic\"}'",
+  "reps": 12
+ },
+ {
+  "name": "rtx-vl5-lmhfp8",
+  "cmd": "vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{\"method\": \"dspark\", \"num_speculative_tokens\": 7, \"draft_sample_method\": \"probabilistic\", \"draft_lm_head_quantization\": \"fp8\"}'",
+  "reps": 12
+ },
+ {
+  "name": "rtx-vl5-ctl-e",
+  "cmd": "vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --max-model-len 262144 --gpu-memory-utilization 0.85 --speculative-config '{\"method\": \"dspark\", \"num_speculative_tokens\": 7, \"draft_sample_method\": \"probabilistic\"}'",
+  "reps": 12
+ }
+]
