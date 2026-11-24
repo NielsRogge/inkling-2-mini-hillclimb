@@ -64,3 +64,10 @@ What got the gains: (1) engine choice: vLLM nightly beats SGLang by +17% c1 with
 What limits further gains: DSpark acceptance ≈ 2.3–2.4 tokens/step at temperature 1.0 (per-position 0.6 / 0.33 / 0.19 …). Draft length is fixed at 7 by the checkpoint in both engines, and the c1 step is latency-bound (48 layer visits). The next levers need kernel work, or a lower serving temperature (a product decision, not a lossless config change).
 Next: acceptance gates on the pinned image digest (Job 6b05ba47…): needles at ~131K and ~258K, a 4 × 60K concurrent soak, a greedy equivalence check vs no-spec, and a repeat of the speed numbers.
 - vLLM round 5 complete (ctl-e 190.8 / 723). SGLang MEGA with mrr4 measured at c8: 412 agg vs mrr8 660, so on SGLang `--max-running-requests 8` is needed for c8 (it still trails vLLM 716–727).
+
+## Acceptance gates: PASS (Job 6b05ba47…, image pinned `vllm/vllm-openai@sha256:eaa63fd6…`, vllm 0.34.0rc1.dev1235+gf2f9edcac, the same build as the hill-climb)
+- Long-context needle, ~50% ctx: 126,537 prompt tokens, **3/3**, TTFT 12.5 s (10.1K tok/s cold prefill)
+- Long-context needle, ~95% ctx: 249,970 prompt tokens, **3/3**, TTFT 28.7 s (8.7K tok/s)
+- Concurrent soak: 4 × ~58K tokens at once, **4/4 ok, 3/3 retrieval each**, 19.8 s wall
+- Greedy equivalence (temp 0, 6 prompts, 256 max tokens incl. reasoning): DSpark-7 vs no-spec **6/6 byte-identical**; DSpark repeat also identical. Lossless confirmed.
+- Speed on the pinned image: c1 **189.9 / 190.2** (best runs), c8 682 / 690; base on the same image 157.5 / 640. Matches the hill-climb.
