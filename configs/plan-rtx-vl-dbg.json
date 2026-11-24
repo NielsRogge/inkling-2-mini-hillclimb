@@ -1,0 +1,12 @@
+[
+ {
+  "name": "rtx-vl-dbg-ds7",
+  "cmd": "vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --speculative-config '{\"method\": \"dspark\", \"num_speculative_tokens\": 7, \"draft_sample_method\": \"probabilistic\"}'",
+  "reps": 2
+ },
+ {
+  "name": "rtx-vl-dbg-ds7-eager",
+  "cmd": "vllm serve thinkingmachines/Inkling-2-Mini --revision 7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6 --served-model-name inkling --host 127.0.0.1 --port 8000 --tensor-parallel-size 1 --reasoning-parser inkling --speculative-config '{\"method\": \"dspark\", \"num_speculative_tokens\": 7, \"draft_sample_method\": \"probabilistic\"}' --enforce-eager",
+  "reps": 2
+ }
+]

@@ -89,7 +89,9 @@ for run in plan:
     print("LEDGER " + last, flush=True)
     if '"ok": false' in last or '"ok": true' not in last:
         print(f"--- tail of {log}", flush=True)
-        print(subprocess.run(["tail", "-n", "80", log], capture_output=True, text=True).stdout, flush=True)
+        print(subprocess.run(["tail", "-n", "40", log], capture_output=True, text=True).stdout, flush=True)
+        print(f"--- error lines in {log}", flush=True)  # the root cause is usually in EngineCore/scheduler output far above the tail
+        print(subprocess.run(["bash", "-c", f"grep -n -E 'Error|error|Exception|assert|not support|unsupported' {log} | grep -v -E '^[0-9]+:\\s+File ' | head -n 60"], capture_output=True, text=True).stdout, flush=True)
     else:  # keep startup diagnostics short
         print(subprocess.run(["bash", "-c", f"grep -E -i 'speculat|accept|cuda graph|KV cache|maximum concurrency|attention backend|Loading took|compil' {log} | tail -n 25"], capture_output=True, text=True).stdout, flush=True)
 stop_server()
