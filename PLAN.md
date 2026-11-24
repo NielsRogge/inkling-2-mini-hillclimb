@@ -43,3 +43,5 @@ Every candidate is run between controls in the same Job (ctl / cand / ctl).
 - vLLM round 4 summary: DSpark-7 c1 = 189.3 / 190.4 / 191.1 / 190.7 (median **190.6**, sd 0.8). c8 = 714 / 724 / 718 / 686 (median **716**). Base controls: c1 157.0 / 157.2, c8 637 / 639. **+21.3% c1, +12.3% c8. Accepted.** Per-prompt c1 values repeat almost exactly across vLLM runs, so vLLM noise is far below SGLang's (sd 0.4% vs 4.5%).
 - SGLang MEGA repeats: mega-a 178.1 (ctl 162.2 / 172.9), mega-b 167.2 (ctl 172.9 / next). c4: 388 / 411 vs ctl 414 / 419. **MEGA rejected:** the round-3 gain did not reproduce and c4 is no better.
 - vLLM `enable_adaptive_verification`: not supported for Inkling2 DSpark (`assert self._draft_topk is None and not self.enable_adaptive_verification` at engine init). Lever closed. rtx-vl5-ctl-a: c1 190.3 / c8 722 (matches round 4; 32K prefill 4.7K is again the first-run-in-Job JIT artifact).
+- vLLM block verification: c1 190.1 / c8 714 vs ctls 190.5 / 727 and 190.3 / 719. **Reject (no effect).**
+- SGLang greedy draft (on MEGA): c1 156.8 / c4 369, clearly worse. **Reject.** SGLang mega-c: 174.4 / 419, within the control range.
