@@ -63,3 +63,6 @@ Prefill ceiling (tok/s, practical):
 KV: 8.59 GB per 256K-token stream
 ```
 Peak TFLOPS uses BF16. NVFP4 expert GEMMs can exceed it, so the prefill ceiling here is conservative.
+
+## Correction after the hill-climb (speculative decoding ceiling)
+`ceiling.py` with the **measured** DSpark acceptance (≈2.33–2.40 tokens/step at temperature 1.0, 7 drafts): the c1 ceiling is **201–207 tok/s** at short context. Verifying 8 positions touches the union of their experts, 1−(1−8/128)^8 ≈ 40% of each layer's experts versus 6% for plain decode. The measured 190.6 tok/s is therefore **~93–95% of the bandwidth ceiling**, so the speculative config is bandwidth-bound, not latency-bound as stated earlier. Without speculation, vLLM's 157 tok/s is 61% of the 256 tok/s ceiling: that regime *is* latency/kernel-bound.
